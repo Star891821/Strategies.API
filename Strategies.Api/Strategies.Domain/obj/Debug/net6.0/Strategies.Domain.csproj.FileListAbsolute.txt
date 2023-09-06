@@ -1,0 +1,15 @@
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Domain\bin\Debug\net6.0\Strategies.Domain.exe
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Domain\bin\Debug\net6.0\Strategies.Domain.deps.json
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Domain\bin\Debug\net6.0\Strategies.Domain.runtimeconfig.json
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Domain\bin\Debug\net6.0\Strategies.Domain.dll
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Domain\bin\Debug\net6.0\Strategies.Domain.pdb
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Domain\obj\Debug\net6.0\Strategies.Domain.csproj.AssemblyReference.cache
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Domain\obj\Debug\net6.0\Strategies.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Domain\obj\Debug\net6.0\Strategies.Domain.AssemblyInfoInputs.cache
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Domain\obj\Debug\net6.0\Strategies.Domain.AssemblyInfo.cs
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Domain\obj\Debug\net6.0\Strategies.Domain.csproj.CoreCompileInputs.cache
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Domain\obj\Debug\net6.0\Strategies.Domain.dll
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Domain\obj\Debug\net6.0\refint\Strategies.Domain.dll
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Domain\obj\Debug\net6.0\Strategies.Domain.pdb
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Domain\obj\Debug\net6.0\Strategies.Domain.genruntimeconfig.cache
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Domain\obj\Debug\net6.0\ref\Strategies.Domain.dll

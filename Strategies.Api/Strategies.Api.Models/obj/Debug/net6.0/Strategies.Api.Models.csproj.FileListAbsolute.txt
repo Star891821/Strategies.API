@@ -1,0 +1,15 @@
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Api.Models\bin\Debug\net6.0\Strategies.Api.Models.exe
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Api.Models\bin\Debug\net6.0\Strategies.Api.Models.deps.json
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Api.Models\bin\Debug\net6.0\Strategies.Api.Models.runtimeconfig.json
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Api.Models\bin\Debug\net6.0\Strategies.Api.Models.dll
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Api.Models\bin\Debug\net6.0\Strategies.Api.Models.pdb
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Api.Models\obj\Debug\net6.0\Strategies.Api.Models.csproj.AssemblyReference.cache
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Api.Models\obj\Debug\net6.0\Strategies.Api.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Api.Models\obj\Debug\net6.0\Strategies.Api.Models.AssemblyInfoInputs.cache
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Api.Models\obj\Debug\net6.0\Strategies.Api.Models.AssemblyInfo.cs
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Api.Models\obj\Debug\net6.0\Strategies.Api.Models.csproj.CoreCompileInputs.cache
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Api.Models\obj\Debug\net6.0\Strategies.Api.Models.dll
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Api.Models\obj\Debug\net6.0\refint\Strategies.Api.Models.dll
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Api.Models\obj\Debug\net6.0\Strategies.Api.Models.pdb
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Api.Models\obj\Debug\net6.0\Strategies.Api.Models.genruntimeconfig.cache
+C:\Projects\Mertizeal\Strategies\Strategies.Api\Strategies.Api.Models\obj\Debug\net6.0\ref\Strategies.Api.Models.dll
