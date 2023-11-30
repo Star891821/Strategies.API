@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace Strategies.Service.DataManager
 {
-    public class LoginService:ILoginService
+    public class LoginService : ILoginService
     {
+        public void Login(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Strategies.Domain.Models;
+
+public partial class StrategyForm
+{
+    public int FormId { get; set; }
+
+    public int? FormStatus { get; set; }
+
+    public DateTime? CreatedAt { get; set; }
+
+    public int? CreatedBy { get; set; }
+
+    public DateTime? ModifiedAt { get; set; }
+
+    public int? ModifiedBy { get; set; }
+}

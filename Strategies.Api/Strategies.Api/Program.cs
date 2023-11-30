@@ -1,8 +1,10 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Strategies.Api.AutoMapper;
+using Strategies.Domain.Models;
 using Strategies.Service.DataManager;
 using Strategies.Service.Repository;
 using System.Text;
@@ -68,6 +70,13 @@ builder.Services.AddSwaggerGen(c => {
         }
     });
 });
+builder.Services.AddDbContext<StrategyDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("StrategyDb"));
+    options.EnableSensitiveDataLogging();
+
+});
+
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddTransient<ILoginService, LoginService>();
