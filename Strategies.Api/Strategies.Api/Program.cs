@@ -79,9 +79,14 @@ builder.Services.AddDbContext<StrategyDbContext>(options =>
 
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-builder.Services.AddTransient<ILoginService, LoginService>();
-
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+//builder.Services.AddTransient<ILoginService, LoginService>();
+builder.Services.AddTransient<IGenericService<CustomerContactDetail>, CustomerContactDetailsService>();
+builder.Services.AddTransient<IGenericService<Customer>, CustomerService>();
+builder.Services.AddTransient<IGenericService<MstRoleGroup>, MasterRoleGroupsService>();
+builder.Services.AddTransient<IGenericService<MstUser>, MasterUser>();
+builder.Services.AddTransient<IGenericService<MstUserRole>, MasterRolesService>();
+builder.Services.AddTransient<IGenericService<PartnerContactDetail>, PartnerContactDetailsService>();
+//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var mappingConfiguration = new MapperConfiguration(config => config.AddProfile(new AutoMapperProfile()));
 IMapper mapper = mappingConfiguration.CreateMapper();
 builder.Services.AddSingleton(mapper);
@@ -91,10 +96,14 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(devCorsPolicy, builder =>
     {
-        builder.WithOrigins("https://localhost:4200").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        //  builder.WithOrigins("https://localhost:4200").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        // builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
         //builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost");
         //builder.SetIsOriginAllowed(origin => true);
+
+        builder.WithOrigins("*").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost");
     });
 });
 var prodCorsPolicy = "prodCorsPolicy";
@@ -102,8 +111,12 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(devCorsPolicy, builder =>
     {
-        builder.WithOrigins("https://localhost:4200").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        //  builder.WithOrigins("https://localhost:4200").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        // builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+
+        builder.WithOrigins("*").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost");
     });
 });
 
@@ -112,13 +125,19 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseCors(devCorsPolicy);
+    app.UseCors(x => x
+               .AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader());
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 else if (app.Environment.IsProduction())
 {
-    app.UseCors(prodCorsPolicy);
+    app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
     app.UseSwagger();
     app.UseSwaggerUI();
 }
