@@ -1,4 +1,5 @@
 ﻿using Strategies.Domain.Models;
+using Strategies.Service.Interfaces;
 using Strategies.Service.Repository;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace Strategies.Service.DataManager
 {
-    public class CustomerContactDetailsService : IGenericService<CustomerContactDetail>
+    public class CustomerContactDetailsService : GenericService<CustomerContactDetail>, ICustomerContactDetailsService
     {
+        public CustomerContactDetailsService(StrategyDbContext context) : base(context) { }
         public bool Delete(int id)
         {
             throw new NotImplementedException();

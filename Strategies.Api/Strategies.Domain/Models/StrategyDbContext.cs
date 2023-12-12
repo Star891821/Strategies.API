@@ -35,13 +35,13 @@ public partial class StrategyDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=SIVAKUMAR\\SQLEXPRESS;Initial Catalog=StrategyDB;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;Integrated Security=true;");
+        => optionsBuilder.UseSqlServer("Server=MSI;Initial Catalog=StrategyDB;User Id=sa;Password=1992;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;Integrated Security=false;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__8CB382B1BF76A6BF");
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__8CB382B1F64F9EE0");
 
             entity.Property(e => e.CustomerId).HasColumnName("Customer_id");
             entity.Property(e => e.CreatedAt)
@@ -55,6 +55,7 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.FirstName)
                 .HasMaxLength(255)
                 .HasColumnName("firstName");
+            entity.Property(e => e.FormId).HasColumnName("form_id");
             entity.Property(e => e.Gender).HasMaxLength(15);
             entity.Property(e => e.HealthStatus)
                 .HasMaxLength(15)
@@ -79,11 +80,16 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.Title)
                 .HasMaxLength(15)
                 .HasColumnName("title");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.Customers)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Customers__form___4E88ABD4");
         });
 
         modelBuilder.Entity<CustomerContactDetail>(entity =>
         {
-            entity.HasKey(e => e.CustomerContactId).HasName("PK__Customer__291D4C16381DC11F");
+            entity.HasKey(e => e.CustomerContactId).HasName("PK__Customer__291D4C16300BE985");
 
             entity.Property(e => e.CustomerContactId).HasColumnName("CustomerContact_id");
             entity.Property(e => e.CreatedAt)
@@ -94,6 +100,7 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.EmailAddress)
                 .HasMaxLength(20)
                 .HasColumnName("Email_Address");
+            entity.Property(e => e.FormId).HasColumnName("form_id");
             entity.Property(e => e.HomeTelephone)
                 .HasMaxLength(15)
                 .HasColumnName("Home_Telephone");
@@ -126,11 +133,16 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.WorkTelephone)
                 .HasMaxLength(15)
                 .HasColumnName("Work_Telephone");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.CustomerContactDetails)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__CustomerC__form___4F7CD00D");
         });
 
         modelBuilder.Entity<MstRoleGroup>(entity =>
         {
-            entity.HasKey(e => e.RolegroupId).HasName("PK__MstRoleG__680F3A9212C07F23");
+            entity.HasKey(e => e.RolegroupId).HasName("PK__MstRoleG__680F3A921D744EE7");
 
             entity.Property(e => e.RolegroupId).HasColumnName("rolegroup_id");
             entity.Property(e => e.ActiveYn).HasColumnName("activeYN");
@@ -159,7 +171,7 @@ public partial class StrategyDbContext : DbContext
 
         modelBuilder.Entity<MstUser>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__MstUsers__B9BE370F4D13182A");
+            entity.HasKey(e => e.UserId).HasName("PK__MstUsers__B9BE370FF718ACF2");
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.CreatedAt)
@@ -205,7 +217,7 @@ public partial class StrategyDbContext : DbContext
 
         modelBuilder.Entity<MstUserRole>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__MstUserR__760965CC9B90683F");
+            entity.HasKey(e => e.RoleId).HasName("PK__MstUserR__760965CC5F87DAEF");
 
             entity.Property(e => e.RoleId).HasColumnName("role_id");
             entity.Property(e => e.ActiveYn).HasColumnName("activeYN");
@@ -225,7 +237,7 @@ public partial class StrategyDbContext : DbContext
 
         modelBuilder.Entity<Partner>(entity =>
         {
-            entity.HasKey(e => e.PartnerId).HasName("PK__Partners__93BED21DA1E2EE67");
+            entity.HasKey(e => e.PartnerId).HasName("PK__Partners__93BED21D59651937");
 
             entity.Property(e => e.PartnerId).HasColumnName("Partner_id");
             entity.Property(e => e.CreatedAt)
@@ -273,7 +285,7 @@ public partial class StrategyDbContext : DbContext
 
         modelBuilder.Entity<PartnerContactDetail>(entity =>
         {
-            entity.HasKey(e => e.PartnerContactId).HasName("PK__PartnerC__98D5C4A585AB460B");
+            entity.HasKey(e => e.PartnerContactId).HasName("PK__PartnerC__98D5C4A58DC23973");
 
             entity.Property(e => e.PartnerContactId).HasColumnName("PartnerContact_id");
             entity.Property(e => e.CreatedAt)
@@ -337,7 +349,7 @@ public partial class StrategyDbContext : DbContext
 
         modelBuilder.Entity<UserRegistration>(entity =>
         {
-            entity.HasKey(e => e.RegisterId).HasName("PK__UserRegi__1418262F8029B694");
+            entity.HasKey(e => e.RegisterId).HasName("PK__UserRegi__1418262F264342CA");
 
             entity.ToTable("UserRegistration");
 

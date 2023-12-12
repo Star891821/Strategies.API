@@ -39,5 +39,9 @@ public partial class Customer
 
     public DateTime? LastloginAt { get; set; }
 
+    public int FormId { get; set; }
+
+    public virtual StrategyForm Form { get; set; } = null!;
+
     public virtual ICollection<Partner> Partners { get; set; } = new List<Partner>();
 }

@@ -7,7 +7,7 @@ public partial class CustomerContactDetail
 {
     public int CustomerContactId { get; set; }
 
-    public int CustomerId { get; set; }
+    public int? CustomerId { get; set; }
 
     public string? MobileTelephone { get; set; }
 
@@ -44,4 +44,8 @@ public partial class CustomerContactDetail
     public DateTime? ModifiedAt { get; set; }
 
     public int? ModifiedBy { get; set; }
+
+    public int FormId { get; set; }
+
+    public virtual StrategyForm Form { get; set; } = null!;
 }

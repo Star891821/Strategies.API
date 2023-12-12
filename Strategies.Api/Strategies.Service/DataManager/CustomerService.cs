@@ -1,15 +1,11 @@
 ﻿using Strategies.Domain.Models;
-using Strategies.Service.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Strategies.Service.Interfaces;
 
 namespace Strategies.Service.DataManager
 {
-    public class CustomerService : IGenericService<Customer>
+    public class CustomerService : GenericService<Customer>, ICustomerService
     {
+        public CustomerService(StrategyDbContext context) : base(context) { }
         public bool Delete(int id)
         {
             throw new NotImplementedException();

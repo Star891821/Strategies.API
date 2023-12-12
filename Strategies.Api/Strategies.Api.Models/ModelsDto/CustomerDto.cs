@@ -41,5 +41,7 @@ namespace Strategies.Api.Models.ModelsDto
         public int? ModifiedBy { get; set; }
 
         public DateTime? LastloginAt { get; set; }
+
+        public int FormId { get; set; }
     }
 }

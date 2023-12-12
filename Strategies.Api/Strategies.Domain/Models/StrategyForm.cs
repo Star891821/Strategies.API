@@ -16,4 +16,8 @@ public partial class StrategyForm
     public DateTime? ModifiedAt { get; set; }
 
     public int? ModifiedBy { get; set; }
+
+    public virtual ICollection<CustomerContactDetail> CustomerContactDetails { get; set; } = new List<CustomerContactDetail>();
+
+    public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
 }
