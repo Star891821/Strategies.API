@@ -27,7 +27,7 @@ namespace Strategies.Api.Controllers
         public async Task<IActionResult> GetStrategyFormDetailsById(int id)
         {
             var statusCode = StatusCodes.Status200OK;
-            object? value = null;
+            object? value;
             try
             {
                 var item = _unitOfWork.StrategyFormService.GetById(id);
@@ -87,15 +87,24 @@ namespace Strategies.Api.Controllers
         {
             var statusCode = StatusCodes.Status200OK;
             object? value = null;
+            try
+            {
+                _unitOfWork.BeginTransaction();
+                var result = _mapper.Map<StrategyForm>(strategyFormDto);
+                await _unitOfWork.StrategyFormService.InsertOrUpdate(result);
+                await _unitOfWork.CompleteAsync();
 
-            _unitOfWork.BeginTransaction();
-            var result = _mapper.Map<StrategyForm>(strategyFormDto);
-            await _unitOfWork.StrategyFormService.InsertOrUpdate(result);
-            await _unitOfWork.CompleteAsync();
-
-            _unitOfWork.CommitTransaction();
-            value = new { AdmissionID = result.FormId, Message = "Success" };
-            statusCode = StatusCodes.Status200OK;
+                _unitOfWork.CommitTransaction();
+                value = new { Formid = result.FormId, Message = "Success" };
+                statusCode = StatusCodes.Status200OK;
+            }
+            catch (Exception ex)
+            {
+                statusCode = StatusCodes.Status500InternalServerError;
+                value = new { Formid = "", Message = ex.Message };
+                _unitOfWork.RollBack();
+            }
+           
             return StatusCode(statusCode, value);
         }
     }
