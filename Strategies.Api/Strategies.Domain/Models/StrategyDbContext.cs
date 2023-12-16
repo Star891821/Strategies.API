@@ -252,6 +252,7 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.FirstName)
                 .HasMaxLength(255)
                 .HasColumnName("firstName");
+            entity.Property(e => e.FormId).HasColumnName("form_id");
             entity.Property(e => e.Gender).HasMaxLength(15);
             entity.Property(e => e.HealthStatus)
                 .HasMaxLength(15)
@@ -277,10 +278,10 @@ public partial class StrategyDbContext : DbContext
                 .HasMaxLength(15)
                 .HasColumnName("title");
 
-            entity.HasOne(d => d.Customer).WithMany(p => p.Partners)
-                .HasForeignKey(d => d.CustomerId)
+            entity.HasOne(d => d.Form).WithMany(p => p.Partners)
+                .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Partners__Custom__4D94879B");
+                .HasConstraintName("FK__Partners__form_i__5AEE82B9");
         });
 
         modelBuilder.Entity<PartnerContactDetail>(entity =>
@@ -296,6 +297,7 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.EmailAddress)
                 .HasMaxLength(20)
                 .HasColumnName("Email_Address");
+            entity.Property(e => e.FormId).HasColumnName("form_id");
             entity.Property(e => e.HomeTelephone)
                 .HasMaxLength(15)
                 .HasColumnName("Home_Telephone");
@@ -329,6 +331,11 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.WorkTelephone)
                 .HasMaxLength(15)
                 .HasColumnName("Work_Telephone");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.PartnerContactDetails)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__PartnerCo__form___5BE2A6F2");
         });
 
         modelBuilder.Entity<StrategyForm>(entity =>

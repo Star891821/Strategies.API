@@ -46,4 +46,8 @@ public partial class PartnerContactDetail
     public DateTime? ModifiedAt { get; set; }
 
     public int? ModifiedBy { get; set; }
+
+    public int FormId { get; set; }
+
+    public virtual StrategyForm Form { get; set; } = null!;
 }

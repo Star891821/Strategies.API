@@ -8,6 +8,8 @@ namespace Strategies.Service.Interfaces
 {
     public interface IStrategyFormUnitOfWork : IDisposable
     {
+        IPartnerContactDetailsService PartnerContactDetailsService { get; }
+        IPartnerService PartnerService { get; }
         ICustomerContactDetailsService customerContactDetailsService { get; }
         ICustomerService customerService { get; }
         IStrategyFormService StrategyFormService { get; }

@@ -20,4 +20,8 @@ public partial class StrategyForm
     public virtual ICollection<CustomerContactDetail> CustomerContactDetails { get; set; } = new List<CustomerContactDetail>();
 
     public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
+
+    public virtual ICollection<PartnerContactDetail> PartnerContactDetails { get; set; } = new List<PartnerContactDetail>();
+
+    public virtual ICollection<Partner> Partners { get; set; } = new List<Partner>();
 }

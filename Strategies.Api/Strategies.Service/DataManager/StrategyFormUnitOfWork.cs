@@ -15,11 +15,13 @@ namespace Strategies.Service.DataManager
         private readonly StrategyDbContext strategyDbContext;
         private readonly IMapper mapper;
         #endregion
+        public IPartnerService PartnerService { get; private set; }
+        public IPartnerContactDetailsService PartnerContactDetailsService { get; private set; }
        public ICustomerContactDetailsService customerContactDetailsService { get; private set; }
        public ICustomerService customerService { get; private set; }
-       // public IStrategyFormService strategyFormService { get; private set; }
-
         public IStrategyFormService StrategyFormService { get; private set; }
+
+       
 
         public StrategyFormUnitOfWork(StrategyDbContext strategyDbContext, IMapper mapper)
         {
@@ -27,6 +29,8 @@ namespace Strategies.Service.DataManager
             this.mapper = mapper;
             customerContactDetailsService = new CustomerContactDetailsService(strategyDbContext);
             customerService = new CustomerService(strategyDbContext);
+            PartnerService = new PartnerService(strategyDbContext);
+            PartnerContactDetailsService = new PartnerContactDetailsService(strategyDbContext); 
             StrategyFormService = new StrategyFormService(strategyDbContext);
         }
         public void Dispose()

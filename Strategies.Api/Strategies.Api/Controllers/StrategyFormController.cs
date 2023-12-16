@@ -57,6 +57,15 @@ namespace Strategies.Api.Controllers
         {
             return _mapper.Map<StrategyFormDto>(item);
         }
+        private List<StrategyFormDto> GetListOfItemsDto(List<StrategyForm> items)
+        {
+            List<StrategyFormDto> newlist = new List<StrategyFormDto>();
+            foreach (var item in items)
+            {
+                newlist.Add(_mapper.Map<StrategyFormDto>(item));
+            }
+            return newlist;
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetAllStrategyFormDetails()
@@ -74,7 +83,7 @@ namespace Strategies.Api.Controllers
                 }
                 else
                 {
-                    value = item;
+                    value = GetListOfItemsDto(item);
                 }
             }
             catch (Exception ex)
@@ -98,7 +107,13 @@ namespace Strategies.Api.Controllers
                 var result = _mapper.Map<StrategyForm>(strategyFormDto);
                 await _unitOfWork.StrategyFormService.InsertOrUpdate(result);
                 await _unitOfWork.CompleteAsync();
-
+                foreach (var item in result.Partners)
+                {
+                    item.CustomerId = result.Customers.FirstOrDefault().CustomerId;
+                    _unitOfWork.PartnerService.InsertOrUpdate(item);
+                    _unitOfWork.Complete();
+                }
+               
                 _unitOfWork.CommitTransaction();
                 value = new { Formid = result.FormId, Message = "Success" };
                 statusCode = StatusCodes.Status200OK;

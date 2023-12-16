@@ -41,5 +41,7 @@ public partial class Partner
 
     public DateTime? LastloginAt { get; set; }
 
-    public virtual Customer Customer { get; set; } = null!;
+    public int FormId { get; set; }
+
+    public virtual StrategyForm Form { get; set; } = null!;
 }

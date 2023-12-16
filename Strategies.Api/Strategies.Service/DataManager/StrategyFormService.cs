@@ -36,6 +36,9 @@ namespace Strategies.Service.DataManager
 
                         UpdateChildEntities(existingEntity.Customers, entity.Customers, (a, b) => a.CustomerId == b.CustomerId);
                         UpdateChildEntities(existingEntity.CustomerContactDetails, entity.CustomerContactDetails, (a, b) => a.CustomerContactId == b.CustomerContactId);
+                        UpdateChildEntities(existingEntity.Partners, entity.Partners, (a, b) => a.PartnerId == b.PartnerId);
+                        UpdateChildEntities(existingEntity.PartnerContactDetails, entity.PartnerContactDetails, (a, b) => a.PartnerContactId == b.PartnerContactId);
+
                     }
                 }
                 else
@@ -108,6 +111,8 @@ namespace Strategies.Service.DataManager
         {
             return await dbSet.Include(a => a.Customers)
                 .Include(a => a.CustomerContactDetails)
+                .Include(a => a.Partners)
+                .Include(a => a.PartnerContactDetails)
                 .ToListAsync();
         }
 
@@ -128,6 +133,8 @@ namespace Strategies.Service.DataManager
                 {
                     dbSet.Entry(admissionForm).Collection(adm => adm.Customers).Load();
                     dbSet.Entry(admissionForm).Collection(adm => adm.CustomerContactDetails).Load();
+                    dbSet.Entry(admissionForm).Collection(adm => adm.Partners).Load();
+                    dbSet.Entry(admissionForm).Collection(adm => adm.PartnerContactDetails).Load();
                 }
 
             }

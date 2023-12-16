@@ -22,5 +22,9 @@ namespace Strategies.Api.Models.ModelsDto
         public virtual List<CustomerDto> Customers { get; set; }
 
         public virtual List<CustomerContactDetailDto> CustomerContactDetails { get; set; }
+
+        public virtual List<PartnerDto> Partners { get; set;}
+
+        public virtual List<PartnerContactDetailDto> PartnerContactDetails { get; set; }
     }
 }
