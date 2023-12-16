@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using Strategies.Api.AutoMapper;
 using Strategies.Domain.Models;
 using Strategies.Service.DataManager;
+using Strategies.Service.Interfaces;
 using Strategies.Service.Repository;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -80,6 +81,7 @@ builder.Services.AddDbContext<StrategyDbContext>(options =>
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 //builder.Services.AddTransient<ILoginService, LoginService>();
+builder.Services.AddScoped<IStrategyFormUnitOfWork, StrategyFormUnitOfWork>();
 builder.Services.AddTransient<IGenericService<CustomerContactDetail>, CustomerContactDetailsService>();
 builder.Services.AddTransient<IGenericService<Customer>, CustomerService>();
 builder.Services.AddTransient<IGenericService<MstRoleGroup>, MasterRoleGroupsService>();

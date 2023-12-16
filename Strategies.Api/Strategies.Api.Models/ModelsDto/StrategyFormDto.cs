@@ -19,7 +19,7 @@ namespace Strategies.Api.Models.ModelsDto
         public DateTime? ModifiedAt { get; set; }
 
         public int? ModifiedBy { get; set; }
-        public virtual List<CustomerDto> CustomerDetails { get; set; }
+        public virtual List<CustomerDto> Customers { get; set; }
 
         public virtual List<CustomerContactDetailDto> CustomerContactDetails { get; set; }
     }

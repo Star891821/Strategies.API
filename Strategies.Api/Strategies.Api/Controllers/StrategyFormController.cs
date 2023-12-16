@@ -30,7 +30,7 @@ namespace Strategies.Api.Controllers
             object? value;
             try
             {
-                var item = _unitOfWork.StrategyFormService.GetById(id);
+                var item = await _unitOfWork.StrategyFormService.GetById(id);
 
                 if (item == null)
                 {
@@ -39,7 +39,7 @@ namespace Strategies.Api.Controllers
                 }
                 else
                 {
-                    value = item;
+                    value = GetItemsDto(item);
                 }
             }
             catch (Exception ex)
@@ -53,6 +53,11 @@ namespace Strategies.Api.Controllers
             return StatusCode(statusCode, value);
         }
 
+        private StrategyFormDto GetItemsDto(StrategyForm item)
+        {
+            return _mapper.Map<StrategyFormDto>(item);
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAllStrategyFormDetails()
         {
@@ -60,7 +65,7 @@ namespace Strategies.Api.Controllers
             object? value = null;
             try
             {
-                var item = _unitOfWork.StrategyFormService.GetAll();
+                var item = await _unitOfWork.StrategyFormService.GetAll();
 
                 if (item == null)
                 {
