@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Strategies.Api.AutoMapper;
+using Strategies.Api.Models.ModelsDto;
 using Strategies.Domain.Models;
 using Strategies.Service.DataManager;
 using Strategies.Service.Interfaces;
@@ -88,6 +89,10 @@ builder.Services.AddTransient<IGenericService<MstRoleGroup>, MasterRoleGroupsSer
 builder.Services.AddTransient<IGenericService<MstUser>, MasterUser>();
 builder.Services.AddTransient<IGenericService<MstUserRole>, MasterRolesService>();
 builder.Services.AddTransient<IGenericService<PartnerContactDetail>, PartnerContactDetailsService>();
+builder.Services.AddTransient<IGenericService<CashFlowRequirement>, CashFlowRequirementService>();
+builder.Services.AddTransient<IGenericService<PlannedExpenditure>, PlannedExpenditureService>();
+builder.Services.AddTransient<IGenericService<ExpectedFutureInflow>, ExpectedFutureInflowService>();
+builder.Services.AddTransient<IGenericService<MstQuestionDto>, MstQuestionService>();
 //builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var mappingConfiguration = new MapperConfiguration(config => config.AddProfile(new AutoMapperProfile()));
 IMapper mapper = mappingConfiguration.CreateMapper();

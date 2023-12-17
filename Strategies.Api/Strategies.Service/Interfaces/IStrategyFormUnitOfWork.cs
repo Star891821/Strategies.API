@@ -8,6 +8,9 @@ namespace Strategies.Service.Interfaces
 {
     public interface IStrategyFormUnitOfWork : IDisposable
     {
+        ICashFlowRequirementService cashFlowRequirementService { get; }
+        IExpectedFutureInflowService expectedFutureInflowService { get; }
+        IPlannedExpenditureService  PlannedExpenditureService { get; }
         IPartnerContactDetailsService PartnerContactDetailsService { get; }
         IPartnerService PartnerService { get; }
         ICustomerContactDetailsService customerContactDetailsService { get; }

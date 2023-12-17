@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strategies.Api", "Strategies.Api\Strategies.Api.csproj", "{813D4763-813D-48C9-A144-6FFB5C9916CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Strategies.Api.Models", "Strategies.Api.Models\Strategies.Api.Models.csproj", "{A5AB4F4E-8623-4E51-8FE3-2EB5556A291A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strategies.Api.Models", "Strategies.Api.Models\Strategies.Api.Models.csproj", "{A5AB4F4E-8623-4E51-8FE3-2EB5556A291A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Strategies.Domain", "Strategies.Domain\Strategies.Domain.csproj", "{FB4FA479-82D5-41C7-B7E4-C919BA91E54A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strategies.Domain", "Strategies.Domain\Strategies.Domain.csproj", "{FB4FA479-82D5-41C7-B7E4-C919BA91E54A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Strategies.Service", "Strategies.Service\Strategies.Service.csproj", "{8AB4AE9B-EEAB-421E-A7AA-ECFD7FBD2391}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strategies.Service", "Strategies.Service\Strategies.Service.csproj", "{8AB4AE9B-EEAB-421E-A7AA-ECFD7FBD2391}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Strategies.Api", "Strategies.Api\Strategies.Api.csproj", "{AE98D305-40CD-4F99-80A9-63628F0B6E1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{813D4763-813D-48C9-A144-6FFB5C9916CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{813D4763-813D-48C9-A144-6FFB5C9916CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{813D4763-813D-48C9-A144-6FFB5C9916CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{813D4763-813D-48C9-A144-6FFB5C9916CB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A5AB4F4E-8623-4E51-8FE3-2EB5556A291A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A5AB4F4E-8623-4E51-8FE3-2EB5556A291A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5AB4F4E-8623-4E51-8FE3-2EB5556A291A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{8AB4AE9B-EEAB-421E-A7AA-ECFD7FBD2391}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AB4AE9B-EEAB-421E-A7AA-ECFD7FBD2391}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AB4AE9B-EEAB-421E-A7AA-ECFD7FBD2391}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE98D305-40CD-4F99-80A9-63628F0B6E1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE98D305-40CD-4F99-80A9-63628F0B6E1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE98D305-40CD-4F99-80A9-63628F0B6E1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE98D305-40CD-4F99-80A9-63628F0B6E1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

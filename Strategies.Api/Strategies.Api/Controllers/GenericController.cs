@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using Strategies.Service.Repository;
 
 namespace Strategies.Api.Controllers
@@ -62,6 +63,60 @@ namespace Strategies.Api.Controllers
             finally
             {
             }
+            return StatusCode(statusCode, value);
+        }
+
+        [HttpPost, ActionName("InsertOrUpdate")]
+        public IActionResult Post([FromBody] T values)
+        {
+            var statusCode = StatusCodes.Status200OK;
+            object? value = null;
+            try
+            {
+               
+                var items = service.InsertOrUpdate(values);
+                if (items == null)
+                {
+                    statusCode = StatusCodes.Status404NotFound;
+                    value = "InsertOrUpdate data is not found";
+                }
+                else
+                {
+                    value = items;
+                }
+            }
+            catch (Exception ex)
+            {
+                statusCode = StatusCodes.Status500InternalServerError;
+                value = ex.Message;
+            }
+            return StatusCode(statusCode, value);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var statusCode = StatusCodes.Status200OK;
+            object? value = null;
+            try
+            {
+                var items = service.Delete(id);
+                if (items == null)
+                {
+                    statusCode = StatusCodes.Status404NotFound;
+                    value = "Delete data is not found";
+                }
+                else
+                {
+                    value = items;
+                }
+            }
+            catch (Exception ex)
+            {
+                statusCode = StatusCodes.Status500InternalServerError;
+                value = ex.Message;
+            }
+            
             return StatusCode(statusCode, value);
         }
     }

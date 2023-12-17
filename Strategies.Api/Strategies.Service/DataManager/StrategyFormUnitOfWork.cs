@@ -15,13 +15,18 @@ namespace Strategies.Service.DataManager
         private readonly StrategyDbContext strategyDbContext;
         private readonly IMapper mapper;
         #endregion
+
         public IPartnerService PartnerService { get; private set; }
         public IPartnerContactDetailsService PartnerContactDetailsService { get; private set; }
        public ICustomerContactDetailsService customerContactDetailsService { get; private set; }
        public ICustomerService customerService { get; private set; }
         public IStrategyFormService StrategyFormService { get; private set; }
 
-       
+        public ICashFlowRequirementService cashFlowRequirementService { get; private set; }
+
+        public IExpectedFutureInflowService expectedFutureInflowService { get; private set; }
+
+        public IPlannedExpenditureService PlannedExpenditureService { get; private set; }
 
         public StrategyFormUnitOfWork(StrategyDbContext strategyDbContext, IMapper mapper)
         {
@@ -30,7 +35,10 @@ namespace Strategies.Service.DataManager
             customerContactDetailsService = new CustomerContactDetailsService(strategyDbContext);
             customerService = new CustomerService(strategyDbContext);
             PartnerService = new PartnerService(strategyDbContext);
-            PartnerContactDetailsService = new PartnerContactDetailsService(strategyDbContext); 
+            PartnerContactDetailsService = new PartnerContactDetailsService(strategyDbContext);
+            cashFlowRequirementService = new CashFlowRequirementService(strategyDbContext);
+            expectedFutureInflowService = new ExpectedFutureInflowService(strategyDbContext);
+            PlannedExpenditureService = new PlannedExpenditureService(strategyDbContext);
             StrategyFormService = new StrategyFormService(strategyDbContext);
         }
         public void Dispose()

@@ -19,6 +19,8 @@ namespace Strategies.Api.Models.ModelsDto
         public DateTime? ModifiedAt { get; set; }
 
         public int? ModifiedBy { get; set; }
+       
+
         public virtual List<CustomerDto> Customers { get; set; }
 
         public virtual List<CustomerContactDetailDto> CustomerContactDetails { get; set; }
@@ -26,5 +28,12 @@ namespace Strategies.Api.Models.ModelsDto
         public virtual List<PartnerDto> Partners { get; set;}
 
         public virtual List<PartnerContactDetailDto> PartnerContactDetails { get; set; }
+
+        public virtual List<CashFlowRequirementDto> CashFlowRequirements { get; set; }
+
+        public virtual List<PlannedExpenditureDto> PlannedExpenditures { get; set; }
+
+        public virtual List<ExpectedFutureInflowDto> ExpectedFutureInflows { get; set; }
+      
     }
 }

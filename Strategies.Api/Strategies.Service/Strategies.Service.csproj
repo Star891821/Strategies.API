@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Strategies.Api.Models\Strategies.Api.Models.csproj" />
     <ProjectReference Include="..\Strategies.Domain\Strategies.Domain.csproj" />
   </ItemGroup>
 

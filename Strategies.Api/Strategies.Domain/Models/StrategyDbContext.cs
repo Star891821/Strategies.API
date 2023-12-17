@@ -15,9 +15,15 @@ public partial class StrategyDbContext : DbContext
     {
     }
 
+    public virtual DbSet<CashFlowRequirement> CashFlowRequirements { get; set; }
+
     public virtual DbSet<Customer> Customers { get; set; }
 
     public virtual DbSet<CustomerContactDetail> CustomerContactDetails { get; set; }
+
+    public virtual DbSet<ExpectedFutureInflow> ExpectedFutureInflows { get; set; }
+
+    public virtual DbSet<MstQuestion> MstQuestions { get; set; }
 
     public virtual DbSet<MstRoleGroup> MstRoleGroups { get; set; }
 
@@ -29,6 +35,8 @@ public partial class StrategyDbContext : DbContext
 
     public virtual DbSet<PartnerContactDetail> PartnerContactDetails { get; set; }
 
+    public virtual DbSet<PlannedExpenditure> PlannedExpenditures { get; set; }
+
     public virtual DbSet<StrategyForm> StrategyForms { get; set; }
 
     public virtual DbSet<UserRegistration> UserRegistrations { get; set; }
@@ -39,6 +47,30 @@ public partial class StrategyDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<CashFlowRequirement>(entity =>
+        {
+            entity.HasKey(e => e.CashflowId).HasName("PK__CashFlow__F45074635D682C7E");
+
+            entity.Property(e => e.CashflowId).HasColumnName("cashflow_id");
+            entity.Property(e => e.Amount).HasMaxLength(255);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.QuestionId).HasColumnName("Question_ID");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.CashFlowRequirements)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__CashFlowR__form___7A672E12");
+        });
+
         modelBuilder.Entity<Customer>(entity =>
         {
             entity.HasKey(e => e.CustomerId).HasName("PK__Customer__8CB382B1F64F9EE0");
@@ -140,6 +172,56 @@ public partial class StrategyDbContext : DbContext
                 .HasConstraintName("FK__CustomerC__form___4F7CD00D");
         });
 
+        modelBuilder.Entity<ExpectedFutureInflow>(entity =>
+        {
+            entity.HasKey(e => e.ExpectedFutureInflowsId).HasName("PK__Expected__28D8A491A4502C1F");
+
+            entity.Property(e => e.ExpectedFutureInflowsId).HasColumnName("ExpectedFutureInflows_id");
+            entity.Property(e => e.Amount).HasMaxLength(255);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.CustomerId).HasColumnName("Customer_id");
+            entity.Property(e => e.Date).HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(255);
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.PartnerId).HasColumnName("Partner_id");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.ExpectedFutureInflows)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__ExpectedF__form___02084FDA");
+        });
+
+        modelBuilder.Entity<MstQuestion>(entity =>
+        {
+            entity.HasKey(e => e.QuestionId).HasName("PK__MstQuest__B0B2E4C68936DA55");
+
+            entity.Property(e => e.QuestionId).HasColumnName("Question_ID");
+            entity.Property(e => e.ActiveYn).HasColumnName("activeYN");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.QuestionDescription)
+                .HasMaxLength(255)
+                .HasColumnName("Question_Description");
+            entity.Property(e => e.SectionName)
+                .HasMaxLength(255)
+                .HasColumnName("Section_Name");
+        });
+
         modelBuilder.Entity<MstRoleGroup>(entity =>
         {
             entity.HasKey(e => e.RolegroupId).HasName("PK__MstRoleG__680F3A921D744EE7");
@@ -237,7 +319,7 @@ public partial class StrategyDbContext : DbContext
 
         modelBuilder.Entity<Partner>(entity =>
         {
-            entity.HasKey(e => e.PartnerId).HasName("PK__Partners__93BED21D59651937");
+            entity.HasKey(e => e.PartnerId).HasName("PK__Partners__93BED21D14FF9D31");
 
             entity.Property(e => e.PartnerId).HasColumnName("Partner_id");
             entity.Property(e => e.CreatedAt)
@@ -281,12 +363,12 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.Partners)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Partners__form_i__5AEE82B9");
+                .HasConstraintName("FK__Partners__form_i__70DDC3D8");
         });
 
         modelBuilder.Entity<PartnerContactDetail>(entity =>
         {
-            entity.HasKey(e => e.PartnerContactId).HasName("PK__PartnerC__98D5C4A58DC23973");
+            entity.HasKey(e => e.PartnerContactId).HasName("PK__PartnerC__98D5C4A5C8A96968");
 
             entity.Property(e => e.PartnerContactId).HasColumnName("PartnerContact_id");
             entity.Property(e => e.CreatedAt)
@@ -335,7 +417,36 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.PartnerContactDetails)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__PartnerCo__form___5BE2A6F2");
+                .HasConstraintName("FK__PartnerCo__form___73BA3083");
+        });
+
+        modelBuilder.Entity<PlannedExpenditure>(entity =>
+        {
+            entity.HasKey(e => e.PlannedExpenditureId).HasName("PK__PlannedE__8ACB67C663F6F8FA");
+
+            entity.ToTable("PlannedExpenditure");
+
+            entity.Property(e => e.PlannedExpenditureId).HasColumnName("PlannedExpenditure_id");
+            entity.Property(e => e.Amount).HasMaxLength(255);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.CustomerId).HasColumnName("Customer_id");
+            entity.Property(e => e.Date).HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(255);
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.PartnerId).HasColumnName("Partner_id");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.PlannedExpenditures)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__PlannedEx__form___7E37BEF6");
         });
 
         modelBuilder.Entity<StrategyForm>(entity =>
