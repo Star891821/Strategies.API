@@ -11,8 +11,6 @@ public partial class ExpectedFutureInflow
 
     public int FormId { get; set; }
 
-    public int? PartnerId { get; set; }
-
     public int? CustomerId { get; set; }
 
     public string Amount { get; set; } = null!;

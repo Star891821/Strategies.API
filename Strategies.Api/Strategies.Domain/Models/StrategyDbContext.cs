@@ -191,7 +191,6 @@ public partial class StrategyDbContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
             entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
-            entity.Property(e => e.PartnerId).HasColumnName("Partner_id");
 
             entity.HasOne(d => d.Form).WithMany(p => p.ExpectedFutureInflows)
                 .HasForeignKey(d => d.FormId)
@@ -338,12 +337,16 @@ public partial class StrategyDbContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
             entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
-            entity.Property(e => e.PartnerId).HasColumnName("Partner_id");
+            entity.Property(e => e.QuestionId).HasColumnName("Question_ID");
 
             entity.HasOne(d => d.Form).WithMany(p => p.PlannedExpenditures)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__PlannedEx__form___7E37BEF6");
+
+            entity.HasOne(d => d.Question).WithMany(p => p.PlannedExpenditures)
+                .HasForeignKey(d => d.QuestionId)
+                .HasConstraintName("FK__PlannedEx__Quest__160F4887");
         });
 
         modelBuilder.Entity<StrategyForm>(entity =>

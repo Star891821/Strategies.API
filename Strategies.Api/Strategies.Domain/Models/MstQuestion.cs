@@ -20,4 +20,6 @@ public partial class MstQuestion
     public DateTime? ModifiedAt { get; set; }
 
     public int? ModifiedBy { get; set; }
+
+    public virtual ICollection<PlannedExpenditure> PlannedExpenditures { get; set; } = new List<PlannedExpenditure>();
 }

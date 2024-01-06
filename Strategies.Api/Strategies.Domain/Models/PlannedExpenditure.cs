@@ -7,11 +7,9 @@ public partial class PlannedExpenditure
 {
     public int PlannedExpenditureId { get; set; }
 
-    public string Description { get; set; } = null!;
+    public string? Description { get; set; }
 
     public int FormId { get; set; }
-
-    public int? PartnerId { get; set; }
 
     public int? CustomerId { get; set; }
 
@@ -27,5 +25,9 @@ public partial class PlannedExpenditure
 
     public int? ModifiedBy { get; set; }
 
+    public int? QuestionId { get; set; }
+
     public virtual StrategyForm Form { get; set; } = null!;
+
+    public virtual MstQuestion? Question { get; set; }
 }

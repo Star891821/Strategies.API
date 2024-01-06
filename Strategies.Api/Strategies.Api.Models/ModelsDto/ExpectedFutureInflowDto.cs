@@ -14,8 +14,6 @@ namespace Strategies.Api.Models.ModelsDto
 
         public int FormId { get; set; }
 
-        public int? PartnerId { get; set; }
-
         public int? CustomerId { get; set; }
 
         public string Amount { get; set; } = null!;
