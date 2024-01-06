@@ -34,8 +34,8 @@ namespace Strategies.Service.DataManager
             this.mapper = mapper;
             customerContactDetailsService = new CustomerContactDetailsService(strategyDbContext);
             customerService = new CustomerService(strategyDbContext);
-            PartnerService = new PartnerService(strategyDbContext);
-            PartnerContactDetailsService = new PartnerContactDetailsService(strategyDbContext);
+           // PartnerService = new PartnerService(strategyDbContext);
+          //  PartnerContactDetailsService = new PartnerContactDetailsService(strategyDbContext);
             cashFlowRequirementService = new CashFlowRequirementService(strategyDbContext);
             expectedFutureInflowService = new ExpectedFutureInflowService(strategyDbContext);
             PlannedExpenditureService = new PlannedExpenditureService(strategyDbContext);

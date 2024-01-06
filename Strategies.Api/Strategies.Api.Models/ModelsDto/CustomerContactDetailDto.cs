@@ -50,5 +50,9 @@ namespace Strategies.Api.Models.ModelsDto
 
         public int FormId { get; set; }
 
+        public bool? IsPartner { get; set; }
+
+        public int? Pid { get; set; }
+
     }
 }

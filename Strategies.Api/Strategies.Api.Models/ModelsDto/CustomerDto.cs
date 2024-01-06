@@ -43,5 +43,9 @@ namespace Strategies.Api.Models.ModelsDto
         public DateTime? LastloginAt { get; set; }
 
         public int FormId { get; set; }
+
+        public bool? IsPartner { get; set; }
+
+        public int? Pid { get; set; }
     }
 }

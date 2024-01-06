@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using NLog.Fluent;
 using Strategies.Api.Models.ModelsDto;
 using Strategies.Domain.Models;
 using Strategies.Service.Interfaces;
@@ -107,12 +104,12 @@ namespace Strategies.Api.Controllers
                 var result = _mapper.Map<StrategyForm>(strategyFormDto);
                 await _unitOfWork.StrategyFormService.InsertOrUpdate(result);
                 await _unitOfWork.CompleteAsync();
-                foreach (var item in result.Partners)
-                {
-                    item.CustomerId = result.Customers.FirstOrDefault().CustomerId;
-                    _unitOfWork.PartnerService.InsertOrUpdate(item);
-                    _unitOfWork.Complete();
-                }
+                //foreach (var item in result.Partners)
+                //{
+                //    item.CustomerId = result.Customers.FirstOrDefault().CustomerId;
+                //    _unitOfWork.PartnerService.InsertOrUpdate(item);
+                //    _unitOfWork.Complete();
+                //}
                
                 _unitOfWork.CommitTransaction();
                 value = new { Formid = result.FormId, Message = "Success" };

@@ -47,5 +47,9 @@ public partial class CustomerContactDetail
 
     public int FormId { get; set; }
 
+    public bool? IsPartner { get; set; }
+
+    public int? Pid { get; set; }
+
     public virtual StrategyForm Form { get; set; } = null!;
 }

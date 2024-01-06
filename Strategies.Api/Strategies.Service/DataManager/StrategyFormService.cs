@@ -36,8 +36,6 @@ namespace Strategies.Service.DataManager
 
                         UpdateChildEntities(existingEntity.Customers, entity.Customers, (a, b) => a.CustomerId == b.CustomerId);
                         UpdateChildEntities(existingEntity.CustomerContactDetails, entity.CustomerContactDetails, (a, b) => a.CustomerContactId == b.CustomerContactId);
-                        UpdateChildEntities(existingEntity.Partners, entity.Partners, (a, b) => a.PartnerId == b.PartnerId);
-                        UpdateChildEntities(existingEntity.PartnerContactDetails, entity.PartnerContactDetails, (a, b) => a.PartnerContactId == b.PartnerContactId);
                         UpdateChildEntities(existingEntity.CashFlowRequirements, entity.CashFlowRequirements, (a, b) => a.CashflowId == b.CashflowId);
                         UpdateChildEntities(existingEntity.PlannedExpenditures, entity.PlannedExpenditures, (a, b) => a.PlannedExpenditureId == b.PlannedExpenditureId);
                         UpdateChildEntities(existingEntity.ExpectedFutureInflows, entity.ExpectedFutureInflows, (a, b) => a.ExpectedFutureInflowsId == b.ExpectedFutureInflowsId);
@@ -114,8 +112,6 @@ namespace Strategies.Service.DataManager
         {
             return await dbSet.Include(a => a.Customers)
                 .Include(a => a.CustomerContactDetails)
-                .Include(a => a.Partners)
-                .Include(a => a.PartnerContactDetails)
                 .Include(a => a.CashFlowRequirements)
                 .Include(a => a.PlannedExpenditures)
                 .Include(a => a.ExpectedFutureInflows)
@@ -139,8 +135,6 @@ namespace Strategies.Service.DataManager
                 {
                     dbSet.Entry(admissionForm).Collection(adm => adm.Customers).Load();
                     dbSet.Entry(admissionForm).Collection(adm => adm.CustomerContactDetails).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.Partners).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.PartnerContactDetails).Load();
                     dbSet.Entry(admissionForm).Collection(adm => adm.CashFlowRequirements).Load();
                     dbSet.Entry(admissionForm).Collection(adm => adm.PlannedExpenditures).Load();
                     dbSet.Entry(admissionForm).Collection(adm => adm.ExpectedFutureInflows).Load();

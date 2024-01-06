@@ -31,10 +31,6 @@ public partial class StrategyDbContext : DbContext
 
     public virtual DbSet<MstUserRole> MstUserRoles { get; set; }
 
-    public virtual DbSet<Partner> Partners { get; set; }
-
-    public virtual DbSet<PartnerContactDetail> PartnerContactDetails { get; set; }
-
     public virtual DbSet<PlannedExpenditure> PlannedExpenditures { get; set; }
 
     public virtual DbSet<StrategyForm> StrategyForms { get; set; }
@@ -92,6 +88,7 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.HealthStatus)
                 .HasMaxLength(15)
                 .HasColumnName("Health_Status");
+            entity.Property(e => e.IsPartner).HasDefaultValueSql("((0))");
             entity.Property(e => e.LastloginAt)
                 .HasColumnType("datetime")
                 .HasColumnName("lastlogin_at");
@@ -103,6 +100,7 @@ public partial class StrategyDbContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
             entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Pid).HasColumnName("PID");
             entity.Property(e => e.PreferredName).HasMaxLength(15);
             entity.Property(e => e.RetirementAge).HasColumnName("Retirement_Age");
             entity.Property(e => e.Surname).HasMaxLength(255);
@@ -136,6 +134,7 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.HomeTelephone)
                 .HasMaxLength(15)
                 .HasColumnName("Home_Telephone");
+            entity.Property(e => e.IsPartner).HasDefaultValueSql("((0))");
             entity.Property(e => e.MobileTelephone)
                 .HasMaxLength(15)
                 .HasColumnName("Mobile_Telephone");
@@ -143,6 +142,7 @@ public partial class StrategyDbContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
             entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Pid).HasColumnName("PID");
             entity.Property(e => e.PostalAddress)
                 .HasMaxLength(255)
                 .HasColumnName("Postal_Address");
@@ -315,109 +315,6 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.RoleName)
                 .HasMaxLength(255)
                 .HasColumnName("role_name");
-        });
-
-        modelBuilder.Entity<Partner>(entity =>
-        {
-            entity.HasKey(e => e.PartnerId).HasName("PK__Partners__93BED21D14FF9D31");
-
-            entity.Property(e => e.PartnerId).HasColumnName("Partner_id");
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime")
-                .HasColumnName("created_at");
-            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
-            entity.Property(e => e.CustomerId).HasColumnName("Customer_id");
-            entity.Property(e => e.Dob)
-                .HasColumnType("datetime")
-                .HasColumnName("DOB");
-            entity.Property(e => e.FirstName)
-                .HasMaxLength(255)
-                .HasColumnName("firstName");
-            entity.Property(e => e.FormId).HasColumnName("form_id");
-            entity.Property(e => e.Gender).HasMaxLength(15);
-            entity.Property(e => e.HealthStatus)
-                .HasMaxLength(15)
-                .HasColumnName("Health_Status");
-            entity.Property(e => e.LastloginAt)
-                .HasColumnType("datetime")
-                .HasColumnName("lastlogin_at");
-            entity.Property(e => e.MaritalStatus)
-                .HasMaxLength(15)
-                .HasColumnName("Marital_Status");
-            entity.Property(e => e.MiddleName).HasMaxLength(255);
-            entity.Property(e => e.ModifiedAt)
-                .HasColumnType("datetime")
-                .HasColumnName("modified_at");
-            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
-            entity.Property(e => e.PreferredName).HasMaxLength(15);
-            entity.Property(e => e.RetirementAge).HasColumnName("Retirement_Age");
-            entity.Property(e => e.Surname).HasMaxLength(255);
-            entity.Property(e => e.TaxResident)
-                .HasMaxLength(25)
-                .HasColumnName("Tax_Resident");
-            entity.Property(e => e.Title)
-                .HasMaxLength(15)
-                .HasColumnName("title");
-
-            entity.HasOne(d => d.Form).WithMany(p => p.Partners)
-                .HasForeignKey(d => d.FormId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Partners__form_i__70DDC3D8");
-        });
-
-        modelBuilder.Entity<PartnerContactDetail>(entity =>
-        {
-            entity.HasKey(e => e.PartnerContactId).HasName("PK__PartnerC__98D5C4A5C8A96968");
-
-            entity.Property(e => e.PartnerContactId).HasColumnName("PartnerContact_id");
-            entity.Property(e => e.CreatedAt)
-                .HasColumnType("datetime")
-                .HasColumnName("created_at");
-            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
-            entity.Property(e => e.CustomerId).HasColumnName("Customer_id");
-            entity.Property(e => e.EmailAddress)
-                .HasMaxLength(20)
-                .HasColumnName("Email_Address");
-            entity.Property(e => e.FormId).HasColumnName("form_id");
-            entity.Property(e => e.HomeTelephone)
-                .HasMaxLength(15)
-                .HasColumnName("Home_Telephone");
-            entity.Property(e => e.MobileTelephone)
-                .HasMaxLength(15)
-                .HasColumnName("Mobile_Telephone");
-            entity.Property(e => e.ModifiedAt)
-                .HasColumnType("datetime")
-                .HasColumnName("modified_at");
-            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
-            entity.Property(e => e.PartnerId).HasColumnName("Partner_id");
-            entity.Property(e => e.PostalAddress)
-                .HasMaxLength(255)
-                .HasColumnName("Postal_Address");
-            entity.Property(e => e.PostalCityId).HasColumnName("Postal_CityId");
-            entity.Property(e => e.PostalPostalCode)
-                .HasMaxLength(50)
-                .HasColumnName("Postal_PostalCode");
-            entity.Property(e => e.PostalStateId).HasColumnName("Postal_StateId");
-            entity.Property(e => e.ResidentialAddress)
-                .HasMaxLength(255)
-                .HasColumnName("Residential_Address");
-            entity.Property(e => e.ResidentialCityId).HasColumnName("Residential_CityId");
-            entity.Property(e => e.ResidentialPostalCode)
-                .HasMaxLength(50)
-                .HasColumnName("Residential_PostalCode");
-            entity.Property(e => e.ResidentialStateId).HasColumnName("Residential_StateId");
-            entity.Property(e => e.SkypeName)
-                .HasMaxLength(15)
-                .HasColumnName("Skype_Name");
-            entity.Property(e => e.WorkTelephone)
-                .HasMaxLength(15)
-                .HasColumnName("Work_Telephone");
-
-            entity.HasOne(d => d.Form).WithMany(p => p.PartnerContactDetails)
-                .HasForeignKey(d => d.FormId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__PartnerCo__form___73BA3083");
         });
 
         modelBuilder.Entity<PlannedExpenditure>(entity =>
