@@ -100,17 +100,32 @@ namespace Strategies.Api.Controllers
             object? value = null;
             try
             {
+                List<CustomerDto> customers = strategyFormDto.Customers;
+                List<CustomerContactDetailDto> customerContactDetailDtos = strategyFormDto.CustomerContactDetails;
+                StrategyFormDto test = strategyFormDto;
+                test.Customers = strategyFormDto.Customers.Where(x => x.IsPartner == false).ToList();
+                test.CustomerContactDetails = strategyFormDto.CustomerContactDetails.Where(x => x.IsPartner == false).ToList();
                 _unitOfWork.BeginTransaction();
-                var result = _mapper.Map<StrategyForm>(strategyFormDto);
+                var result = _mapper.Map<StrategyForm>(test);
                 await _unitOfWork.StrategyFormService.InsertOrUpdate(result);
                 await _unitOfWork.CompleteAsync();
-                //foreach (var item in result.Partners)
-                //{
-                //    item.CustomerId = result.Customers.FirstOrDefault().CustomerId;
-                //    _unitOfWork.PartnerService.InsertOrUpdate(item);
-                //    _unitOfWork.Complete();
-                //}
-               
+                foreach (var partner in customers.Where(x=>x.IsPartner == true))
+                {
+                    partner.Pid = result.Customers.First().CustomerId;
+                    partner.FormId = result.Customers.First().FormId;
+                    _unitOfWork.customerService.InsertOrUpdate(_mapper.Map<Customer>(partner));
+                   await _unitOfWork.CompleteAsync();
+                }
+                foreach (var partnerContacts in customerContactDetailDtos.Where(x => x.IsPartner == true))
+                {
+                    partnerContacts.Pid = result.CustomerContactDetails.First().CustomerContactId;
+                    partnerContacts.CustomerId = result.Customers.First().CustomerId;
+                    partnerContacts.FormId = result.Customers.First().FormId;
+                    _unitOfWork.customerContactDetailsService.InsertOrUpdate(_mapper.Map<CustomerContactDetail>(partnerContacts));
+                    await _unitOfWork.CompleteAsync();
+                }
+
+
                 _unitOfWork.CommitTransaction();
                 value = new { Formid = result.FormId, Message = "Success" };
                 statusCode = StatusCodes.Status200OK;

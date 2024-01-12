@@ -1,4 +1,5 @@
-﻿using Strategies.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Strategies.Domain.Models;
 using Strategies.Service.Interfaces;
 
 namespace Strategies.Service.DataManager
@@ -26,10 +27,42 @@ namespace Strategies.Service.DataManager
                 return dbContext.Customers.Where(c=>c.CustomerId == id).FirstOrDefault();
             }
         }
-
+       
         public bool InsertOrUpdate(Customer entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var exist = GetById(entity.CustomerId);
+
+
+                if (exist != null)
+                {
+                    Customer existingEntity = context.Set<Customer>().Local.FirstOrDefault(e => e.CustomerId == entity.CustomerId);
+
+                    if (existingEntity == null)
+                    {
+                        context.Entry(entity).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        context.Entry(existingEntity).CurrentValues.SetValues(entity);
+
+                    }
+                }
+                else
+                {
+                     base.InsertOrUpdate(entity);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the specific exception
+                return false;
+            }
+            return true;
+
         }
     }
 }
