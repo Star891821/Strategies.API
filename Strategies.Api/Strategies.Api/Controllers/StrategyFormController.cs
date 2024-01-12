@@ -102,19 +102,21 @@ namespace Strategies.Api.Controllers
             {
                 List<CustomerDto> customers = strategyFormDto.Customers;
                 List<CustomerContactDetailDto> customerContactDetailDtos = strategyFormDto.CustomerContactDetails;
+                List<EmploymentDetailDto> employmentDetailDtos = strategyFormDto.EmploymentDetails;
                 StrategyFormDto test = strategyFormDto;
                 test.Customers = strategyFormDto.Customers.Where(x => x.IsPartner == false).ToList();
                 test.CustomerContactDetails = strategyFormDto.CustomerContactDetails.Where(x => x.IsPartner == false).ToList();
+                test.EmploymentDetails = strategyFormDto.EmploymentDetails.Where(x => x.IsPartner == false).ToList();
                 _unitOfWork.BeginTransaction();
                 var result = _mapper.Map<StrategyForm>(test);
                 await _unitOfWork.StrategyFormService.InsertOrUpdate(result);
                 await _unitOfWork.CompleteAsync();
-                foreach (var partner in customers.Where(x=>x.IsPartner == true))
+                foreach (var partner in customers.Where(x => x.IsPartner == true))
                 {
                     partner.Pid = result.Customers.First().CustomerId;
                     partner.FormId = result.Customers.First().FormId;
                     _unitOfWork.customerService.InsertOrUpdate(_mapper.Map<Customer>(partner));
-                   await _unitOfWork.CompleteAsync();
+                    await _unitOfWork.CompleteAsync();
                 }
                 foreach (var partnerContacts in customerContactDetailDtos.Where(x => x.IsPartner == true))
                 {
@@ -124,7 +126,13 @@ namespace Strategies.Api.Controllers
                     _unitOfWork.customerContactDetailsService.InsertOrUpdate(_mapper.Map<CustomerContactDetail>(partnerContacts));
                     await _unitOfWork.CompleteAsync();
                 }
-
+                foreach (var partnerEmploymentDetails in employmentDetailDtos.Where(x => x.IsPartner == true))
+                {
+                    partnerEmploymentDetails.Pid = result.EmploymentDetails.First().EmpId;
+                    partnerEmploymentDetails.FormId = result.Customers.First().FormId;
+                    _unitOfWork.employmentService.InsertOrUpdate(_mapper.Map<EmploymentDetail>(partnerEmploymentDetails));
+                    await _unitOfWork.CompleteAsync();
+                }
 
                 _unitOfWork.CommitTransaction();
                 value = new { Formid = result.FormId, Message = "Success" };
@@ -136,7 +144,7 @@ namespace Strategies.Api.Controllers
                 value = new { Formid = "", Message = ex.Message };
                 _unitOfWork.RollBack();
             }
-           
+
             return StatusCode(statusCode, value);
         }
     }

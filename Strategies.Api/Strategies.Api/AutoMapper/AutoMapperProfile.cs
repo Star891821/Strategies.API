@@ -12,7 +12,7 @@ namespace Strategies.Api.AutoMapper
             CreateMap<Customer, CustomerDto>().ReverseMap();
             CreateMap<CustomerContactDetail, CustomerContactDetailDto>().ReverseMap();
            // CreateMap<Partner, PartnerDto>().ReverseMap();
-           // CreateMap<PartnerContactDetail, PartnerContactDetailDto>().ReverseMap();
+            CreateMap<EmploymentDetail, EmploymentDetailDto>().ReverseMap();
             CreateMap<CashFlowRequirement, CashFlowRequirementDto>().ReverseMap();
             CreateMap<ExpectedFutureInflow, ExpectedFutureInflowDto>().ReverseMap();
             CreateMap<PlannedExpenditure, PlannedExpenditureDto>().ReverseMap();

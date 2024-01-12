@@ -30,6 +30,9 @@ namespace Strategies.Api.Models.ModelsDto
         public virtual List<PlannedExpenditureDto> PlannedExpenditures { get; set; }
 
         public virtual List<ExpectedFutureInflowDto> ExpectedFutureInflows { get; set; }
-      
+
+        public virtual List<EmploymentDetailDto> EmploymentDetails { get; set; } 
+
+
     }
 }

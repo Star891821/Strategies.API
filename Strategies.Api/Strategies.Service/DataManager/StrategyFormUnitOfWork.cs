@@ -28,6 +28,8 @@ namespace Strategies.Service.DataManager
 
         public IPlannedExpenditureService PlannedExpenditureService { get; private set; }
 
+        public IEmploymentService employmentService { get; private set; }
+
         public StrategyFormUnitOfWork(StrategyDbContext strategyDbContext, IMapper mapper)
         {
             this.strategyDbContext = strategyDbContext;
@@ -39,6 +41,7 @@ namespace Strategies.Service.DataManager
             cashFlowRequirementService = new CashFlowRequirementService(strategyDbContext);
             expectedFutureInflowService = new ExpectedFutureInflowService(strategyDbContext);
             PlannedExpenditureService = new PlannedExpenditureService(strategyDbContext);
+            employmentService = new EmploymentService(strategyDbContext);
             StrategyFormService = new StrategyFormService(strategyDbContext);
         }
         public void Dispose()

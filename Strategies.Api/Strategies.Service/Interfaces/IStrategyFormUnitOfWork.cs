@@ -15,6 +15,7 @@ namespace Strategies.Service.Interfaces
         IPartnerService PartnerService { get; }
         ICustomerContactDetailsService customerContactDetailsService { get; }
         ICustomerService customerService { get; }
+        IEmploymentService employmentService { get; }
         IStrategyFormService StrategyFormService { get; }
 
         ///  void RemoveNullableEntitiesFromDb();

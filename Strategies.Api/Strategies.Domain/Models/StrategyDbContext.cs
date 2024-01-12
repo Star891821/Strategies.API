@@ -21,6 +21,8 @@ public partial class StrategyDbContext : DbContext
 
     public virtual DbSet<CustomerContactDetail> CustomerContactDetails { get; set; }
 
+    public virtual DbSet<EmploymentDetail> EmploymentDetails { get; set; }
+
     public virtual DbSet<ExpectedFutureInflow> ExpectedFutureInflows { get; set; }
 
     public virtual DbSet<MstQuestion> MstQuestions { get; set; }
@@ -170,6 +172,34 @@ public partial class StrategyDbContext : DbContext
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__CustomerC__form___4F7CD00D");
+        });
+
+        modelBuilder.Entity<EmploymentDetail>(entity =>
+        {
+            entity.HasKey(e => e.EmpId).HasName("PK__Employme__1299A8617CB1D9B4");
+
+            entity.Property(e => e.EmpId).HasColumnName("emp_id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.Income).HasMaxLength(255);
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.NameOfEmployer).HasMaxLength(255);
+            entity.Property(e => e.Notes).HasMaxLength(255);
+            entity.Property(e => e.Occupation).HasMaxLength(255);
+            entity.Property(e => e.Pid).HasColumnName("PID");
+            entity.Property(e => e.QuestionId).HasColumnName("Question_ID");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.EmploymentDetails)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Employmen__form___2A164134");
         });
 
         modelBuilder.Entity<ExpectedFutureInflow>(entity =>
