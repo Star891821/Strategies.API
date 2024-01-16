@@ -11,7 +11,8 @@ namespace Strategies.Api.AutoMapper
             CreateMap<StrategyForm, StrategyFormDto>().ReverseMap();
             CreateMap<Customer, CustomerDto>().ReverseMap();
             CreateMap<CustomerContactDetail, CustomerContactDetailDto>().ReverseMap();
-           // CreateMap<Partner, PartnerDto>().ReverseMap();
+            CreateMap<ExpenseDetail, ExpenseDetailDto>().ReverseMap();
+            CreateMap<IncomeDetail, IncomeDetailDto>().ReverseMap();
             CreateMap<EmploymentDetail, EmploymentDetailDto>().ReverseMap();
             CreateMap<CashFlowRequirement, CashFlowRequirementDto>().ReverseMap();
             CreateMap<ExpectedFutureInflow, ExpectedFutureInflowDto>().ReverseMap();

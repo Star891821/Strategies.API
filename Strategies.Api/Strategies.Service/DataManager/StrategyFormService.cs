@@ -138,6 +138,8 @@ namespace Strategies.Service.DataManager
                     dbSet.Entry(admissionForm).Collection(adm => adm.CashFlowRequirements).Load();
                     dbSet.Entry(admissionForm).Collection(adm => adm.PlannedExpenditures).Load();
                     dbSet.Entry(admissionForm).Collection(adm => adm.ExpectedFutureInflows).Load();
+                    dbSet.Entry(admissionForm).Collection(adm => adm.IncomeDetails).Load();
+                    dbSet.Entry(admissionForm).Collection(adm => adm.ExpenseDetails).Load();
                 }
 
             }

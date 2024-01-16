@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Strategies.Api.Models.ModelsDto
+{
+    public class IncomeDetailDto
+    {
+        public int IncomeDetailsId { get; set; }
+
+        public int FormId { get; set; }
+
+        public int? QuestionId { get; set; }
+
+        public string? Description { get; set; }
+
+        public string? Owners { get; set; }
+
+        public string? Amounts { get; set; }
+
+        public string? Frequency { get; set; }
+
+        public DateTime? CreatedAt { get; set; }
+
+        public int? CreatedBy { get; set; }
+
+        public DateTime? ModifiedAt { get; set; }
+
+        public int? ModifiedBy { get; set; }
+
+    }
+}

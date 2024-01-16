@@ -27,5 +27,9 @@ public partial class StrategyForm
 
     public virtual ICollection<ExpectedFutureInflow> ExpectedFutureInflows { get; set; } = new List<ExpectedFutureInflow>();
 
+    public virtual ICollection<ExpenseDetail> ExpenseDetails { get; set; } = new List<ExpenseDetail>();
+
+    public virtual ICollection<IncomeDetail> IncomeDetails { get; set; } = new List<IncomeDetail>();
+
     public virtual ICollection<PlannedExpenditure> PlannedExpenditures { get; set; } = new List<PlannedExpenditure>();
 }

@@ -21,5 +21,9 @@ public partial class MstQuestion
 
     public int? ModifiedBy { get; set; }
 
+    public virtual ICollection<ExpenseDetail> ExpenseDetails { get; set; } = new List<ExpenseDetail>();
+
+    public virtual ICollection<IncomeDetail> IncomeDetails { get; set; } = new List<IncomeDetail>();
+
     public virtual ICollection<PlannedExpenditure> PlannedExpenditures { get; set; } = new List<PlannedExpenditure>();
 }
