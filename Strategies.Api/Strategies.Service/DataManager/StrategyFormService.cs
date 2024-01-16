@@ -140,6 +140,17 @@ namespace Strategies.Service.DataManager
                     dbSet.Entry(admissionForm).Collection(adm => adm.ExpectedFutureInflows).Load();
                     dbSet.Entry(admissionForm).Collection(adm => adm.IncomeDetails).Load();
                     dbSet.Entry(admissionForm).Collection(adm => adm.ExpenseDetails).Load();
+                    dbSet.Entry(admissionForm).Collection(adm => adm.EmploymentDetails).Load();
+                    dbSet.Entry(admissionForm).Collection(adm => adm.LifeStyleAssetDetails).Load();
+                    dbSet.Entry(admissionForm).Collection(adm => adm.InvestmentAssetDetails).Load();
+                    dbSet.Entry(admissionForm).Collection(adm => adm.LiabilitiesDetails).Load();
+                    dbSet.Entry(admissionForm).Collection(adm => adm.SuperAssetDetails).Load();
+                    dbSet.Entry(admissionForm).Collection(adm => adm.InsuranceDetails).Load();
+                    dbSet.Entry(admissionForm).Collection(adm => adm.DependantsDetails).Load();
+                    dbSet.Entry(admissionForm).Collection(adm => adm.EstatePlannings).Load();
+                    dbSet.Entry(admissionForm).Collection(adm => adm.AssociatedStructures).Load();
+                    dbSet.Entry(admissionForm).Collection(adm => adm.ProfessionalAdvisersDetails).Load();
+                    dbSet.Entry(admissionForm).Collection(adm => adm.Disasquentionnaires).Load();
                 }
 
             }

@@ -15,15 +15,35 @@ public partial class StrategyDbContext : DbContext
     {
     }
 
+    public virtual DbSet<AssociatedStructure> AssociatedStructures { get; set; }
+
     public virtual DbSet<CashFlowRequirement> CashFlowRequirements { get; set; }
 
     public virtual DbSet<Customer> Customers { get; set; }
 
     public virtual DbSet<CustomerContactDetail> CustomerContactDetails { get; set; }
 
+    public virtual DbSet<DependantsDetail> DependantsDetails { get; set; }
+
+    public virtual DbSet<Disasquentionnaire> Disasquentionnaires { get; set; }
+
     public virtual DbSet<EmploymentDetail> EmploymentDetails { get; set; }
 
+    public virtual DbSet<EstatePlanning> EstatePlannings { get; set; }
+
     public virtual DbSet<ExpectedFutureInflow> ExpectedFutureInflows { get; set; }
+
+    public virtual DbSet<ExpenseDetail> ExpenseDetails { get; set; }
+
+    public virtual DbSet<IncomeDetail> IncomeDetails { get; set; }
+
+    public virtual DbSet<InsuranceDetail> InsuranceDetails { get; set; }
+
+    public virtual DbSet<InvestmentAssetDetail> InvestmentAssetDetails { get; set; }
+
+    public virtual DbSet<LiabilitiesDetail> LiabilitiesDetails { get; set; }
+
+    public virtual DbSet<LifeStyleAssetDetail> LifeStyleAssetDetails { get; set; }
 
     public virtual DbSet<MstQuestion> MstQuestions { get; set; }
 
@@ -35,7 +55,11 @@ public partial class StrategyDbContext : DbContext
 
     public virtual DbSet<PlannedExpenditure> PlannedExpenditures { get; set; }
 
+    public virtual DbSet<ProfessionalAdvisersDetail> ProfessionalAdvisersDetails { get; set; }
+
     public virtual DbSet<StrategyForm> StrategyForms { get; set; }
+
+    public virtual DbSet<SuperAssetDetail> SuperAssetDetails { get; set; }
 
     public virtual DbSet<UserRegistration> UserRegistrations { get; set; }
 
@@ -45,6 +69,35 @@ public partial class StrategyDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<AssociatedStructure>(entity =>
+        {
+            entity.HasKey(e => e.AssociatedStructuresId).HasName("PK__Associat__6BA73EF2D7F1280E");
+
+            entity.Property(e => e.AssociatedStructuresId).HasColumnName("AssociatedStructures_id");
+            entity.Property(e => e.AssociatedStructuresDetails)
+                .HasMaxLength(155)
+                .HasColumnName("AssociatedStructures_details");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.DescriptionType)
+                .HasMaxLength(255)
+                .HasColumnName("Description_Type");
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Owners).HasMaxLength(50);
+
+            entity.HasOne(d => d.Form).WithMany(p => p.AssociatedStructures)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Associate__form___367C1819");
+        });
+
         modelBuilder.Entity<CashFlowRequirement>(entity =>
         {
             entity.HasKey(e => e.CashflowId).HasName("PK__CashFlow__F45074635D682C7E");
@@ -130,7 +183,7 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.CreatedBy).HasColumnName("created_by");
             entity.Property(e => e.CustomerId).HasColumnName("Customer_id");
             entity.Property(e => e.EmailAddress)
-                .HasMaxLength(20)
+                .HasMaxLength(255)
                 .HasColumnName("Email_Address");
             entity.Property(e => e.FormId).HasColumnName("form_id");
             entity.Property(e => e.HomeTelephone)
@@ -174,6 +227,83 @@ public partial class StrategyDbContext : DbContext
                 .HasConstraintName("FK__CustomerC__form___4F7CD00D");
         });
 
+        modelBuilder.Entity<DependantsDetail>(entity =>
+        {
+            entity.HasKey(e => e.DependantsDetailsId).HasName("PK__Dependan__4B906EF7AEC97D89");
+
+            entity.Property(e => e.DependantsDetailsId).HasColumnName("DependantsDetails_Id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.DependantsDetailsAdditionalInfo)
+                .HasMaxLength(255)
+                .HasColumnName("DependantsDetails_AdditionalInfo");
+            entity.Property(e => e.DependantsDetailsAge).HasColumnName("DependantsDetails_Age");
+            entity.Property(e => e.DependantsDetailsCurGradeOrPrepYear)
+                .HasMaxLength(255)
+                .HasColumnName("DependantsDetails_CurGradeOrPrepYear");
+            entity.Property(e => e.DependantsDetailsDob)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("DependantsDetails_DOB");
+            entity.Property(e => e.DependantsDetailsFundingForPrivateSchool)
+                .HasMaxLength(50)
+                .HasColumnName("DependantsDetails_FundingForPrivateSchool");
+            entity.Property(e => e.DependantsDetailsGender)
+                .HasMaxLength(150)
+                .HasColumnName("DependantsDetails_gender");
+            entity.Property(e => e.DependantsDetailsName)
+                .HasMaxLength(150)
+                .HasColumnName("DependantsDetails_Name");
+            entity.Property(e => e.DependantsDetailsNumberOfYears).HasColumnName("DependantsDetails_NumberOfYears");
+            entity.Property(e => e.DependantsDetailsRelationship)
+                .HasMaxLength(50)
+                .HasColumnName("DependantsDetails_relationship");
+            entity.Property(e => e.DependantsDetailsSupportAge).HasColumnName("DependantsDetails_SupportAge");
+            entity.Property(e => e.DependantsDetailsWhichSchools)
+                .HasMaxLength(255)
+                .HasColumnName("DependantsDetails_WhichSchools");
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Owners).HasMaxLength(50);
+
+            entity.HasOne(d => d.Form).WithMany(p => p.DependantsDetails)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Dependant__form___395884C4");
+        });
+
+        modelBuilder.Entity<Disasquentionnaire>(entity =>
+        {
+            entity.HasKey(e => e.DisasqId).HasName("PK__DISASQue__833D39E91B26D8BC");
+
+            entity.ToTable("DISASQuentionnaire");
+
+            entity.Property(e => e.DisasqId).HasColumnName("DISASQ_id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.DisasqAnswer).HasColumnName("DISASQ_Answer");
+            entity.Property(e => e.DisasqQuestion).HasColumnName("DISASQ_Question");
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.Disasquentionnaires)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__DISASQuen__form___5AB9788F");
+        });
+
         modelBuilder.Entity<EmploymentDetail>(entity =>
         {
             entity.HasKey(e => e.EmpId).HasName("PK__Employme__1299A8617CB1D9B4");
@@ -202,6 +332,38 @@ public partial class StrategyDbContext : DbContext
                 .HasConstraintName("FK__Employmen__form___2A164134");
         });
 
+        modelBuilder.Entity<EstatePlanning>(entity =>
+        {
+            entity.HasKey(e => e.EstatePlanningId).HasName("PK__EstatePl__977D3057488F04C3");
+
+            entity.ToTable("EstatePlanning");
+
+            entity.Property(e => e.EstatePlanningId).HasColumnName("EstatePlanning_id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.EstatePlanningStatus)
+                .HasMaxLength(255)
+                .HasColumnName("EstatePlanning_status");
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Notes).HasMaxLength(255);
+            entity.Property(e => e.Owners).HasMaxLength(50);
+            entity.Property(e => e.PlanningType)
+                .HasMaxLength(255)
+                .HasColumnName("Planning_Type");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.EstatePlannings)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__EstatePla__form___3C34F16F");
+        });
+
         modelBuilder.Entity<ExpectedFutureInflow>(entity =>
         {
             entity.HasKey(e => e.ExpectedFutureInflowsId).HasName("PK__Expected__28D8A491A4502C1F");
@@ -226,6 +388,189 @@ public partial class StrategyDbContext : DbContext
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__ExpectedF__form___02084FDA");
+        });
+
+        modelBuilder.Entity<ExpenseDetail>(entity =>
+        {
+            entity.HasKey(e => e.ExpenseDetailsId).HasName("PK__ExpenseD__396FAD45E24BAAE4");
+
+            entity.Property(e => e.ExpenseDetailsId).HasColumnName("ExpenseDetails_id");
+            entity.Property(e => e.Amounts).HasMaxLength(255);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.Description).HasMaxLength(255);
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.Frequency).HasMaxLength(255);
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Owners).HasMaxLength(255);
+            entity.Property(e => e.QuestionId).HasColumnName("Question_ID");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.ExpenseDetails)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__ExpenseDe__form___32AB8735");
+
+            entity.HasOne(d => d.Question).WithMany(p => p.ExpenseDetails)
+                .HasForeignKey(d => d.QuestionId)
+                .HasConstraintName("FK__ExpenseDe__Quest__339FAB6E");
+        });
+
+        modelBuilder.Entity<IncomeDetail>(entity =>
+        {
+            entity.HasKey(e => e.IncomeDetailsId).HasName("PK__IncomeDe__E30F8B6E5BC4178F");
+
+            entity.Property(e => e.IncomeDetailsId).HasColumnName("IncomeDetails_id");
+            entity.Property(e => e.Amounts).HasMaxLength(255);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.Description).HasMaxLength(255);
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.Frequency).HasMaxLength(255);
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Owners).HasMaxLength(255);
+            entity.Property(e => e.QuestionId).HasColumnName("Question_ID");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.IncomeDetails)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__IncomeDet__form___2DE6D218");
+
+            entity.HasOne(d => d.Question).WithMany(p => p.IncomeDetails)
+                .HasForeignKey(d => d.QuestionId)
+                .HasConstraintName("FK__IncomeDet__Quest__2EDAF651");
+        });
+
+        modelBuilder.Entity<InsuranceDetail>(entity =>
+        {
+            entity.HasKey(e => e.InsuranceId).HasName("PK__Insuranc__58B60F458F92A27F");
+
+            entity.Property(e => e.InsuranceId).HasColumnName("insurance_id");
+            entity.Property(e => e.Comments).HasMaxLength(255);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.InsurerType).HasColumnName("Insurer_Type");
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Owners).HasMaxLength(50);
+            entity.Property(e => e.PremiumAmount)
+                .HasMaxLength(255)
+                .HasColumnName("premium_amount");
+            entity.Property(e => e.PremiumType)
+                .HasMaxLength(255)
+                .HasColumnName("premium_type");
+            entity.Property(e => e.Super)
+                .HasMaxLength(255)
+                .HasColumnName("super");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.InsuranceDetails)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Insurance__form___3F115E1A");
+        });
+
+        modelBuilder.Entity<InvestmentAssetDetail>(entity =>
+        {
+            entity.HasKey(e => e.InvestmentAssetDetailsId).HasName("PK__Investme__9BA8E40B6DC2755A");
+
+            entity.Property(e => e.InvestmentAssetDetailsId).HasColumnName("InvestmentAssetDetails_id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.CurrentBalance)
+                .HasMaxLength(255)
+                .HasColumnName("Current_balance");
+            entity.Property(e => e.Descriptions).HasMaxLength(255);
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Owners).HasMaxLength(50);
+
+            entity.HasOne(d => d.Form).WithMany(p => p.InvestmentAssetDetails)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Investmen__form___41EDCAC5");
+        });
+
+        modelBuilder.Entity<LiabilitiesDetail>(entity =>
+        {
+            entity.HasKey(e => e.LiabilitiesDetailsId).HasName("PK__Liabilit__A2A7927A55ECDEC1");
+
+            entity.Property(e => e.LiabilitiesDetailsId).HasColumnName("LiabilitiesDetails_id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.InterestRate)
+                .HasMaxLength(20)
+                .HasColumnName("Interest_Rate");
+            entity.Property(e => e.LiabilityType).HasMaxLength(255);
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.OutstandingBalance)
+                .HasMaxLength(150)
+                .HasColumnName("Outstanding_Balance");
+            entity.Property(e => e.Owners).HasMaxLength(50);
+            entity.Property(e => e.RepaymentFrequence)
+                .HasMaxLength(255)
+                .HasColumnName("Repayment_Frequence");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.LiabilitiesDetails)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Liabiliti__form___44CA3770");
+        });
+
+        modelBuilder.Entity<LifeStyleAssetDetail>(entity =>
+        {
+            entity.HasKey(e => e.LifeStyleAssetDetailsId).HasName("PK__LifeStyl__E73F105B0A899DE3");
+
+            entity.Property(e => e.LifeStyleAssetDetailsId).HasColumnName("LifeStyleAssetDetails_id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.CurrentBalance)
+                .HasMaxLength(255)
+                .HasColumnName("Current_balance");
+            entity.Property(e => e.Descriptions).HasMaxLength(255);
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Owners).HasMaxLength(50);
+
+            entity.HasOne(d => d.Form).WithMany(p => p.LifeStyleAssetDetails)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__LifeStyle__form___47A6A41B");
         });
 
         modelBuilder.Entity<MstQuestion>(entity =>
@@ -379,6 +724,45 @@ public partial class StrategyDbContext : DbContext
                 .HasConstraintName("FK__PlannedEx__Quest__160F4887");
         });
 
+        modelBuilder.Entity<ProfessionalAdvisersDetail>(entity =>
+        {
+            entity.HasKey(e => e.ProfessionalAdvisersDetailsId).HasName("PK__Professi__A755D23FF68D49A8");
+
+            entity.Property(e => e.ProfessionalAdvisersDetailsId).HasColumnName("ProfessionalAdvisersDetails_id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.EmailAddress)
+                .HasMaxLength(80)
+                .HasColumnName("Email_Address");
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Notes).HasMaxLength(250);
+            entity.Property(e => e.Owners).HasMaxLength(50);
+            entity.Property(e => e.ProfessionalAdvisersDetailsBusinessName)
+                .HasMaxLength(122)
+                .HasColumnName("ProfessionalAdvisersDetails_BusinessName");
+            entity.Property(e => e.ProfessionalAdvisersDetailsName)
+                .HasMaxLength(122)
+                .HasColumnName("ProfessionalAdvisersDetails_Name");
+            entity.Property(e => e.ProfessionalAdvisersDetailsType)
+                .HasMaxLength(80)
+                .HasColumnName("ProfessionalAdvisersDetails_Type");
+            entity.Property(e => e.WorkTelephone)
+                .HasMaxLength(80)
+                .HasColumnName("Work_Telephone");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.ProfessionalAdvisersDetails)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Professio__form___4A8310C6");
+        });
+
         modelBuilder.Entity<StrategyForm>(entity =>
         {
             entity.HasKey(e => e.FormId).HasName("PK__Strategy__190E16C9D64462F9");
@@ -393,6 +777,34 @@ public partial class StrategyDbContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
             entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+        });
+
+        modelBuilder.Entity<SuperAssetDetail>(entity =>
+        {
+            entity.HasKey(e => e.SuperAssetDetailsId).HasName("PK__SuperAss__BDB5E4D4D9E3E3B1");
+
+            entity.Property(e => e.SuperAssetDetailsId).HasColumnName("SuperAssetDetails_id");
+            entity.Property(e => e.Contributions).HasMaxLength(255);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.FundBalance)
+                .HasMaxLength(255)
+                .HasColumnName("Fund_Balance");
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Owners).HasMaxLength(50);
+            entity.Property(e => e.SuperassetType).HasColumnName("Superasset_Type");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.SuperAssetDetails)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__SuperAsse__form___4D5F7D71");
         });
 
         modelBuilder.Entity<UserRegistration>(entity =>
