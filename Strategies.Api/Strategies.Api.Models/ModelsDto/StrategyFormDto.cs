@@ -13,7 +13,8 @@
         public DateTime? ModifiedAt { get; set; }
 
         public int? ModifiedBy { get; set; }
-       
+
+        public int? Step { get; set; }
 
         public virtual List<CustomerDto> Customers { get; set; }
 
