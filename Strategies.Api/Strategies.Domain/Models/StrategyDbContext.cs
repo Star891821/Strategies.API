@@ -635,6 +635,9 @@ public partial class StrategyDbContext : DbContext
                 .HasColumnName("created_at");
             entity.Property(e => e.CreatedBy).HasColumnName("created_by");
             entity.Property(e => e.Enforce2Fa).HasColumnName("enforce2FA");
+            entity.Property(e => e.IsLocked).HasDefaultValueSql("((0))");
+            entity.Property(e => e.IsUpdated).HasDefaultValueSql("((0))");
+            entity.Property(e => e.LastPwdChangedDate).HasColumnType("datetime");
             entity.Property(e => e.LastloginAt)
                 .HasColumnType("datetime")
                 .HasColumnName("lastlogin_at");
@@ -642,6 +645,12 @@ public partial class StrategyDbContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
             entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Otp)
+                .HasMaxLength(10)
+                .HasColumnName("OTP");
+            entity.Property(e => e.OtpgeneratedDate)
+                .HasColumnType("datetime")
+                .HasColumnName("OTPGeneratedDate");
             entity.Property(e => e.RoleId).HasColumnName("role_id");
             entity.Property(e => e.UserGivenName)
                 .HasMaxLength(255)

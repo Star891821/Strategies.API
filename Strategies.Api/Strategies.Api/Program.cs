@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -7,13 +8,26 @@ using Strategies.Api.AutoMapper;
 using Strategies.Api.Models.ModelsDto;
 using Strategies.Domain.Models;
 using Strategies.Service.DataManager;
+using Strategies.Service.DataManager.EmailDataManagers;
 using Strategies.Service.Interfaces;
 using Strategies.Service.Repository;
 using System.Text;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+// Add services to the container.
+var emailConfig = builder.Configuration
+    .GetSection("EmailConfiguration")
+    .Get<EmailConfiguration>();
+builder.Services.AddSingleton(emailConfig);
+builder.Services.Configure<FormOptions>(o =>
+{
+    o.ValueLengthLimit = int.MaxValue;
+    o.MultipartBodyLengthLimit = int.MaxValue;
+    o.MemoryBufferThreshold = int.MaxValue;
+});
 
+builder.Services.AddHttpContextAccessor();
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -86,13 +100,13 @@ builder.Services.AddScoped<IStrategyFormUnitOfWork, StrategyFormUnitOfWork>();
 builder.Services.AddTransient<IGenericService<CustomerContactDetail>, CustomerContactDetailsService>();
 builder.Services.AddTransient<IGenericService<Customer>, CustomerService>();
 builder.Services.AddTransient<IGenericService<MstRoleGroup>, MasterRoleGroupsService>();
-builder.Services.AddTransient<IGenericService<MstUser>, MasterUser>();
+builder.Services.AddTransient<IUserService<MstUser>, MasterUser>();
 builder.Services.AddTransient<IGenericService<MstUserRole>, MasterRolesService>();
-builder.Services.AddTransient<IGenericService<PartnerContactDetail>, PartnerContactDetailsService>();
 builder.Services.AddTransient<IGenericService<CashFlowRequirement>, CashFlowRequirementService>();
 builder.Services.AddTransient<IGenericService<PlannedExpenditure>, PlannedExpenditureService>();
 builder.Services.AddTransient<IGenericService<ExpectedFutureInflow>, ExpectedFutureInflowService>();
 builder.Services.AddTransient<IGenericService<MstQuestionDto>, MstQuestionService>();
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 //builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var mappingConfiguration = new MapperConfiguration(config => config.AddProfile(new AutoMapperProfile()));
 IMapper mapper = mappingConfiguration.CreateMapper();

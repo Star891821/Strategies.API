@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using Strategies.Domain.Models;
 using Strategies.Service.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Strategies.Service.DataManager
 {
@@ -16,8 +11,6 @@ namespace Strategies.Service.DataManager
         private readonly IMapper mapper;
         #endregion
 
-        public IPartnerService PartnerService { get; private set; }
-        public IPartnerContactDetailsService PartnerContactDetailsService { get; private set; }
        public ICustomerContactDetailsService customerContactDetailsService { get; private set; }
        public ICustomerService customerService { get; private set; }
         public IStrategyFormService StrategyFormService { get; private set; }

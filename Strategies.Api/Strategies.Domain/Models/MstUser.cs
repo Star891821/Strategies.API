@@ -35,5 +35,15 @@ public partial class MstUser
 
     public string? Useremail { get; set; }
 
+    public bool? IsUpdated { get; set; }
+
+    public string? Otp { get; set; }
+
+    public DateTime? OtpgeneratedDate { get; set; }
+
+    public bool? IsLocked { get; set; }
+
+    public DateTime? LastPwdChangedDate { get; set; }
+
     public virtual MstUserRole Role { get; set; } = null!;
 }

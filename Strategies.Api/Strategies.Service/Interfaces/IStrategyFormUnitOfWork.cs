@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Strategies.Service.Interfaces
+﻿namespace Strategies.Service.Interfaces
 {
     public interface IStrategyFormUnitOfWork : IDisposable
     {
         ICashFlowRequirementService cashFlowRequirementService { get; }
         IExpectedFutureInflowService expectedFutureInflowService { get; }
         IPlannedExpenditureService  PlannedExpenditureService { get; }
-        IPartnerContactDetailsService PartnerContactDetailsService { get; }
-        IPartnerService PartnerService { get; }
         ICustomerContactDetailsService customerContactDetailsService { get; }
         ICustomerService customerService { get; }
         IEmploymentService employmentService { get; }
