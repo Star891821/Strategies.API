@@ -150,7 +150,7 @@ namespace Strategies.Service.DataManager
                     dbSet.Entry(admissionForm).Collection(adm => adm.EstatePlannings).Load();
                     dbSet.Entry(admissionForm).Collection(adm => adm.AssociatedStructures).Load();
                     dbSet.Entry(admissionForm).Collection(adm => adm.ProfessionalAdvisersDetails).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.Disasquentionnaires).Load();
+                   // dbSet.Entry(admissionForm).Collection(adm => adm.Disasquentionnaires).Load();
                 }
 
             }

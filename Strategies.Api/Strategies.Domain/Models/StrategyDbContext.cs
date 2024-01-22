@@ -25,8 +25,6 @@ public partial class StrategyDbContext : DbContext
 
     public virtual DbSet<DependantsDetail> DependantsDetails { get; set; }
 
-    public virtual DbSet<Disasquentionnaire> Disasquentionnaires { get; set; }
-
     public virtual DbSet<EmploymentDetail> EmploymentDetails { get; set; }
 
     public virtual DbSet<EstatePlanning> EstatePlannings { get; set; }
@@ -159,9 +157,7 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.PreferredName).HasMaxLength(15);
             entity.Property(e => e.RetirementAge).HasColumnName("Retirement_Age");
             entity.Property(e => e.Surname).HasMaxLength(255);
-            entity.Property(e => e.TaxResident)
-                .HasMaxLength(25)
-                .HasColumnName("Tax_Resident");
+            entity.Property(e => e.TaxResident).HasColumnName("Tax_Resident");
             entity.Property(e => e.Title)
                 .HasMaxLength(15)
                 .HasColumnName("title");
@@ -241,30 +237,20 @@ public partial class StrategyDbContext : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("DependantsDetails_AdditionalInfo");
             entity.Property(e => e.DependantsDetailsAge).HasColumnName("DependantsDetails_Age");
-            entity.Property(e => e.DependantsDetailsCurGradeOrPrepYear)
-                .HasMaxLength(255)
-                .HasColumnName("DependantsDetails_CurGradeOrPrepYear");
             entity.Property(e => e.DependantsDetailsDob)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("DependantsDetails_DOB");
-            entity.Property(e => e.DependantsDetailsFundingForPrivateSchool)
-                .HasMaxLength(50)
-                .HasColumnName("DependantsDetails_FundingForPrivateSchool");
             entity.Property(e => e.DependantsDetailsGender)
                 .HasMaxLength(150)
                 .HasColumnName("DependantsDetails_gender");
             entity.Property(e => e.DependantsDetailsName)
                 .HasMaxLength(150)
                 .HasColumnName("DependantsDetails_Name");
-            entity.Property(e => e.DependantsDetailsNumberOfYears).HasColumnName("DependantsDetails_NumberOfYears");
             entity.Property(e => e.DependantsDetailsRelationship)
                 .HasMaxLength(50)
                 .HasColumnName("DependantsDetails_relationship");
             entity.Property(e => e.DependantsDetailsSupportAge).HasColumnName("DependantsDetails_SupportAge");
-            entity.Property(e => e.DependantsDetailsWhichSchools)
-                .HasMaxLength(255)
-                .HasColumnName("DependantsDetails_WhichSchools");
             entity.Property(e => e.FormId).HasColumnName("form_id");
             entity.Property(e => e.ModifiedAt)
                 .HasColumnType("datetime")
@@ -276,32 +262,6 @@ public partial class StrategyDbContext : DbContext
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Dependant__form___395884C4");
-        });
-
-        modelBuilder.Entity<Disasquentionnaire>(entity =>
-        {
-            entity.HasKey(e => e.DisasqId).HasName("PK__DISASQue__833D39E91B26D8BC");
-
-            entity.ToTable("DISASQuentionnaire");
-
-            entity.Property(e => e.DisasqId).HasColumnName("DISASQ_id");
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime")
-                .HasColumnName("created_at");
-            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
-            entity.Property(e => e.DisasqAnswer).HasColumnName("DISASQ_Answer");
-            entity.Property(e => e.DisasqQuestion).HasColumnName("DISASQ_Question");
-            entity.Property(e => e.FormId).HasColumnName("form_id");
-            entity.Property(e => e.ModifiedAt)
-                .HasColumnType("datetime")
-                .HasColumnName("modified_at");
-            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
-
-            entity.HasOne(d => d.Form).WithMany(p => p.Disasquentionnaires)
-                .HasForeignKey(d => d.FormId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__DISASQuen__form___5AB9788F");
         });
 
         modelBuilder.Entity<EmploymentDetail>(entity =>

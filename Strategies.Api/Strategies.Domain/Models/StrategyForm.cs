@@ -29,8 +29,6 @@ public partial class StrategyForm
 
     public virtual ICollection<DependantsDetail> DependantsDetails { get; set; } = new List<DependantsDetail>();
 
-    public virtual ICollection<Disasquentionnaire> Disasquentionnaires { get; set; } = new List<Disasquentionnaire>();
-
     public virtual ICollection<EmploymentDetail> EmploymentDetails { get; set; } = new List<EmploymentDetail>();
 
     public virtual ICollection<EstatePlanning> EstatePlannings { get; set; } = new List<EstatePlanning>();

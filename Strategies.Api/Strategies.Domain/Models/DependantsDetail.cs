@@ -21,14 +21,6 @@ public partial class DependantsDetail
 
     public string? DependantsDetailsRelationship { get; set; }
 
-    public string? DependantsDetailsFundingForPrivateSchool { get; set; }
-
-    public int? DependantsDetailsNumberOfYears { get; set; }
-
-    public string? DependantsDetailsWhichSchools { get; set; }
-
-    public string? DependantsDetailsCurGradeOrPrepYear { get; set; }
-
     public int? DependantsDetailsSupportAge { get; set; }
 
     public string? DependantsDetailsAdditionalInfo { get; set; }

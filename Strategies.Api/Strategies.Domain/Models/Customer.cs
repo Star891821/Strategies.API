@@ -21,7 +21,7 @@ public partial class Customer
 
     public string? Gender { get; set; }
 
-    public string? TaxResident { get; set; }
+    public bool? TaxResident { get; set; }
 
     public string? MaritalStatus { get; set; }
 

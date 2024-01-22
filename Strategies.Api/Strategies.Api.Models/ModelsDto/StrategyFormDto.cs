@@ -52,6 +52,6 @@
 
         public virtual List<ProfessionalAdvisersDetailDto> ProfessionalAdvisersDetails { get; set; }
 
-        public virtual List<DisasquentionnaireDto> Disasquentionnaires { get; set; }
+      //  public virtual List<DisasquentionnaireDto> Disasquentionnaires { get; set; }
     }
 }
