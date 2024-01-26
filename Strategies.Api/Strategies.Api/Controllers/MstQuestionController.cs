@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NLog.Fluent;
 using Strategies.Api.Models.ModelsDto;
 using Strategies.Service.Repository;
 

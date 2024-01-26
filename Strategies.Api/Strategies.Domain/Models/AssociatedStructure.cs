@@ -23,5 +23,7 @@ public partial class AssociatedStructure
 
     public int? ModifiedBy { get; set; }
 
+    public bool? IsJoint { get; set; }
+
     public virtual StrategyForm Form { get; set; } = null!;
 }

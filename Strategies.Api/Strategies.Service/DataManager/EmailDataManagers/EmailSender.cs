@@ -1,12 +1,8 @@
 ﻿using Strategies.Api.Models.ModelsDto;
 using Strategies.Service.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Strategies.Service.DataManager.EmailDataManagers
 {

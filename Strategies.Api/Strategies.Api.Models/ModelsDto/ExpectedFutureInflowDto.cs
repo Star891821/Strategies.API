@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Strategies.Api.Models.ModelsDto
+﻿namespace Strategies.Api.Models.ModelsDto
 {
     public class ExpectedFutureInflowDto
     {
@@ -14,7 +8,9 @@ namespace Strategies.Api.Models.ModelsDto
 
         public int FormId { get; set; }
 
-        public int? CustomerId { get; set; }
+        public string? Owners { get; set; }
+
+        public bool? IsJoint { get; set; }
 
         public string Amount { get; set; } = null!;
 
@@ -27,6 +23,8 @@ namespace Strategies.Api.Models.ModelsDto
         public DateTime? ModifiedAt { get; set; }
 
         public int? ModifiedBy { get; set; }
+
+        public int? QuestionId { get; set; }
 
     }
 }

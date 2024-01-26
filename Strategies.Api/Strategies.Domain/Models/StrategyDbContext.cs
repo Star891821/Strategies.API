@@ -84,6 +84,7 @@ public partial class StrategyDbContext : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("Description_Type");
             entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.IsJoint).HasDefaultValueSql("((0))");
             entity.Property(e => e.ModifiedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
@@ -260,6 +261,7 @@ public partial class StrategyDbContext : DbContext
                 .HasColumnName("DependantsDetails_relationship");
             entity.Property(e => e.DependantsDetailsSupportAge).HasColumnName("DependantsDetails_SupportAge");
             entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.IsJoint).HasDefaultValueSql("((0))");
             entity.Property(e => e.ModifiedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
@@ -316,6 +318,7 @@ public partial class StrategyDbContext : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("EstatePlanning_status");
             entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.IsJoint).HasDefaultValueSql("((0))");
             entity.Property(e => e.ModifiedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
@@ -343,19 +346,25 @@ public partial class StrategyDbContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
             entity.Property(e => e.CreatedBy).HasColumnName("created_by");
-            entity.Property(e => e.CustomerId).HasColumnName("Customer_id");
             entity.Property(e => e.Date).HasColumnType("datetime");
             entity.Property(e => e.Description).HasMaxLength(255);
             entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.IsJoint).HasDefaultValueSql("((0))");
             entity.Property(e => e.ModifiedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
             entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Owners).HasMaxLength(255);
+            entity.Property(e => e.QuestionId).HasColumnName("Question_ID");
 
             entity.HasOne(d => d.Form).WithMany(p => p.ExpectedFutureInflows)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__ExpectedF__form___02084FDA");
+
+            entity.HasOne(d => d.Question).WithMany(p => p.ExpectedFutureInflows)
+                .HasForeignKey(d => d.QuestionId)
+                .HasConstraintName("FK__ExpectedF__Quest__69FBBC1F");
         });
 
         modelBuilder.Entity<ExpenseDetail>(entity =>
@@ -372,6 +381,7 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.Description).HasMaxLength(255);
             entity.Property(e => e.FormId).HasColumnName("form_id");
             entity.Property(e => e.Frequency).HasMaxLength(255);
+            entity.Property(e => e.IsJoint).HasDefaultValueSql("((0))");
             entity.Property(e => e.ModifiedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
@@ -403,6 +413,7 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.Description).HasMaxLength(255);
             entity.Property(e => e.FormId).HasColumnName("form_id");
             entity.Property(e => e.Frequency).HasMaxLength(255);
+            entity.Property(e => e.IsJoint).HasDefaultValueSql("((0))");
             entity.Property(e => e.ModifiedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
@@ -433,6 +444,7 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.CreatedBy).HasColumnName("created_by");
             entity.Property(e => e.FormId).HasColumnName("form_id");
             entity.Property(e => e.InsurerType).HasColumnName("Insurer_Type");
+            entity.Property(e => e.IsJoint).HasDefaultValueSql("((0))");
             entity.Property(e => e.ModifiedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
@@ -469,6 +481,7 @@ public partial class StrategyDbContext : DbContext
                 .HasColumnName("Current_balance");
             entity.Property(e => e.Descriptions).HasMaxLength(255);
             entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.IsJoint).HasDefaultValueSql("((0))");
             entity.Property(e => e.ModifiedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
@@ -495,6 +508,7 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.InterestRate)
                 .HasMaxLength(20)
                 .HasColumnName("Interest_Rate");
+            entity.Property(e => e.IsJoint).HasDefaultValueSql("((0))");
             entity.Property(e => e.LiabilityType).HasMaxLength(255);
             entity.Property(e => e.ModifiedAt)
                 .HasColumnType("datetime")
@@ -529,6 +543,7 @@ public partial class StrategyDbContext : DbContext
                 .HasColumnName("Current_balance");
             entity.Property(e => e.Descriptions).HasMaxLength(255);
             entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.IsJoint).HasDefaultValueSql("((0))");
             entity.Property(e => e.ModifiedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
@@ -681,14 +696,15 @@ public partial class StrategyDbContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
             entity.Property(e => e.CreatedBy).HasColumnName("created_by");
-            entity.Property(e => e.CustomerId).HasColumnName("Customer_id");
             entity.Property(e => e.Date).HasColumnType("datetime");
             entity.Property(e => e.Description).HasMaxLength(255);
             entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.IsJoint).HasDefaultValueSql("((0))");
             entity.Property(e => e.ModifiedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
             entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Owners).HasMaxLength(255);
             entity.Property(e => e.QuestionId).HasColumnName("Question_ID");
 
             entity.HasOne(d => d.Form).WithMany(p => p.PlannedExpenditures)
@@ -715,6 +731,7 @@ public partial class StrategyDbContext : DbContext
                 .HasMaxLength(80)
                 .HasColumnName("Email_Address");
             entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.IsJoint).HasDefaultValueSql("((0))");
             entity.Property(e => e.ModifiedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
@@ -772,6 +789,7 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.FundBalance)
                 .HasMaxLength(255)
                 .HasColumnName("Fund_Balance");
+            entity.Property(e => e.IsJoint).HasDefaultValueSql("((0))");
             entity.Property(e => e.ModifiedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");

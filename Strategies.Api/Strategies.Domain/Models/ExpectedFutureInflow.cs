@@ -11,8 +11,6 @@ public partial class ExpectedFutureInflow
 
     public int FormId { get; set; }
 
-    public int? CustomerId { get; set; }
-
     public string Amount { get; set; } = null!;
 
     public DateTime Date { get; set; }
@@ -25,5 +23,13 @@ public partial class ExpectedFutureInflow
 
     public int? ModifiedBy { get; set; }
 
+    public string? Owners { get; set; }
+
+    public bool? IsJoint { get; set; }
+
+    public int? QuestionId { get; set; }
+
     public virtual StrategyForm Form { get; set; } = null!;
+
+    public virtual MstQuestion? Question { get; set; }
 }

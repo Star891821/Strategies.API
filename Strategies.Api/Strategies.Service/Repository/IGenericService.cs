@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Strategies.Service.Repository
+﻿namespace Strategies.Service.Repository
 {
     public interface IGenericService<T>
     {

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Strategies.Api.Models.ModelsDto;
-using Strategies.Domain.Models;
 using Strategies.Service.DataManager;
 using Strategies.Service.Interfaces;
 using System.Security.Cryptography;

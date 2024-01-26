@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Strategies.Domain.Models;
+﻿namespace Strategies.Domain.Models;
 
 public partial class Disasquentionnaire
 {

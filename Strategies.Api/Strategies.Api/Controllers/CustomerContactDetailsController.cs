@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using NLog.Fluent;
+﻿using Microsoft.AspNetCore.Mvc;
 using Strategies.Domain.Models;
 using Strategies.Service.Repository;
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Strategies.Api.Models.ModelsDto
+﻿namespace Strategies.Api.Models.ModelsDto
 {
     public class ExpenseDetailDto
     {
@@ -17,6 +11,8 @@ namespace Strategies.Api.Models.ModelsDto
         public string? Description { get; set; }
 
         public string? Owners { get; set; }
+
+        public bool? IsJoint { get; set; }
 
         public string? Amounts { get; set; }
 
