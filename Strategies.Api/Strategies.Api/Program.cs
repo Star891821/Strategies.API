@@ -100,7 +100,7 @@ builder.Services.AddScoped<IStrategyFormUnitOfWork, StrategyFormUnitOfWork>();
 builder.Services.AddTransient<IGenericService<CustomerContactDetail>, CustomerContactDetailsService>();
 builder.Services.AddTransient<IGenericService<Customer>, CustomerService>();
 builder.Services.AddTransient<IGenericService<MstRoleGroup>, MasterRoleGroupsService>();
-builder.Services.AddTransient<IUserService<MstUser>, MasterUser>();
+builder.Services.AddTransient<IUserService<MstUserDto>, MasterUser>();
 builder.Services.AddTransient<IGenericService<MstUserRole>, MasterRolesService>();
 builder.Services.AddTransient<IGenericService<CashFlowRequirement>, CashFlowRequirementService>();
 builder.Services.AddTransient<IGenericService<PlannedExpenditure>, PlannedExpenditureService>();

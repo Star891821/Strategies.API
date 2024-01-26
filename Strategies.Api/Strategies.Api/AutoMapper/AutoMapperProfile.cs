@@ -31,6 +31,7 @@ namespace Strategies.Api.AutoMapper
             CreateMap<ExpectedFutureInflow, ExpectedFutureInflowDto>().ReverseMap();
             CreateMap<PlannedExpenditure, PlannedExpenditureDto>().ReverseMap();
             CreateMap<MstQuestion, MstQuestionDto>().ReverseMap();
+            CreateMap<MstUser, MstUserDto>().ReverseMap();
         }
     }
 }

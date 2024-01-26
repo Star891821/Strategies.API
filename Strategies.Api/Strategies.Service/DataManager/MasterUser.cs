@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Configuration;
+using Strategies.Api.Models.ModelsDto;
 using Strategies.Domain.Models;
 using Strategies.Service.Interfaces;
 
 namespace Strategies.Service.DataManager
 {
-    public class MasterUser : IUserService<MstUser>
+    public class MasterUser : IUserService<MstUserDto>
     {
         private IMapper _mapper;
         private readonly IConfiguration _configuration;
@@ -28,29 +29,32 @@ namespace Strategies.Service.DataManager
             }
         }
 
-        public List<MstUser>? GetAll()
+        public List<MstUserDto>? GetAll()
         {
             using (var dbContext = new StrategyDbContext())
             {
-                return dbContext.MstUsers.ToList();
+                var result = dbContext.MstUsers.ToList();
+                return _mapper.Map<List<MstUserDto>>(result);
             }
         }
 
-        public MstUser? GetById(int id)
+        public MstUserDto? GetById(int id)
         {
             using (var dbContext = new StrategyDbContext())
             {
-                return dbContext.MstUsers.Where(x => x.UserId == id).FirstOrDefault();
+                var result = dbContext.MstUsers?.FirstOrDefault(e => e.UserId.Equals(id));
+                return _mapper.Map<MstUserDto>(result);
             }
         }
-        public MstUser? GetByName(string userName)
+        public MstUserDto? GetByName(string userName)
         {
             using (var dbContext = new StrategyDbContext())
             {
-                return dbContext.MstUsers?.FirstOrDefault(e => e.Username.Equals(userName));
+                var result = dbContext.MstUsers?.FirstOrDefault(e => e.Username.Equals(userName));
+                return _mapper.Map<MstUserDto>(result);
             }
         }
-        public bool InsertOrUpdate(MstUser entity)
+        public bool InsertOrUpdate(MstUserDto entity)
         {
             using (var dbContext = new StrategyDbContext())
             {
@@ -64,7 +68,7 @@ namespace Strategies.Service.DataManager
                         {
                             entity.Userpassword = dbentity.Userpassword;
                             entity.IsUpdated = true;
-                            dbContext.Entry(dbentity).CurrentValues.SetValues(entity);
+                            dbContext.Entry(dbentity).CurrentValues.SetValues(_mapper.Map<MstUser>(entity));
                         }
                         else
                         {
@@ -82,7 +86,7 @@ namespace Strategies.Service.DataManager
                         else
                         {
                             entity.IsUpdated = true;
-                            dbContext.MstUsers.Add(entity);
+                            dbContext.MstUsers.Add(_mapper.Map<MstUser>(entity));
                         }
 
                     }
@@ -286,7 +290,7 @@ namespace Strategies.Service.DataManager
             }
         }
 
-        public string InsertOrUpdateUser(MstUser entity)
+        public string InsertOrUpdateUser(MstUserDto entity)
         {
             using (var dbContext = new StrategyDbContext())
             {
@@ -299,7 +303,7 @@ namespace Strategies.Service.DataManager
                         if (dbentity != null)
                         {
                             entity.Userpassword = dbentity.Userpassword;
-                            dbContext.Entry(dbentity).CurrentValues.SetValues(entity);
+                            dbContext.Entry(dbentity).CurrentValues.SetValues(_mapper.Map<MstUser>(entity));
                             dbContext.SaveChanges();
                             return "User Updated Successfully";
                         }
@@ -317,7 +321,7 @@ namespace Strategies.Service.DataManager
                         }
                         if (!string.IsNullOrEmpty(entity.Userpassword))
                         {
-                            dbContext.MstUsers.Add(entity);
+                            dbContext.MstUsers.Add(_mapper.Map<MstUser>(entity));
                             dbContext.SaveChanges();
                             return "User Added Successfully";
                         }

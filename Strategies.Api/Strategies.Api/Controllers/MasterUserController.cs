@@ -13,10 +13,10 @@ namespace Strategies.Api.Controllers
     public class MasterUserController : ControllerBase
     {
         private IConfiguration _configuration;
-        IUserService<MstUser> userService;
+        IUserService<MstUserDto> userService;
         private readonly IEmailSender _emailSender;
 
-        public MasterUserController(IUserService<MstUser> genericService,IConfiguration configuration,IEmailSender emailSender)
+        public MasterUserController(IUserService<MstUserDto> genericService,IConfiguration configuration,IEmailSender emailSender)
         {
             userService = genericService;
             _configuration = configuration;
@@ -131,7 +131,7 @@ namespace Strategies.Api.Controllers
         [HttpPost, ActionName("InsertOrUpdate")]
         //   [ServiceFilter(typeof(ValidationFilterAttribute))]
         [AllowAnonymous]
-        public IActionResult Post([FromBody] MstUser values)
+        public IActionResult Post([FromBody] MstUserDto values)
         {
             var statusCode = StatusCodes.Status200OK;
             object? value = null;
