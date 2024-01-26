@@ -197,19 +197,27 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.PostalAddress)
                 .HasMaxLength(255)
                 .HasColumnName("Postal_Address");
-            entity.Property(e => e.PostalCityId).HasColumnName("Postal_CityId");
+            entity.Property(e => e.PostalCityId)
+                .HasMaxLength(200)
+                .HasColumnName("Postal_CityId");
             entity.Property(e => e.PostalPostalCode)
                 .HasMaxLength(50)
                 .HasColumnName("Postal_PostalCode");
-            entity.Property(e => e.PostalStateId).HasColumnName("Postal_StateId");
+            entity.Property(e => e.PostalStateId)
+                .HasMaxLength(200)
+                .HasColumnName("Postal_StateId");
             entity.Property(e => e.ResidentialAddress)
                 .HasMaxLength(255)
                 .HasColumnName("Residential_Address");
-            entity.Property(e => e.ResidentialCityId).HasColumnName("Residential_CityId");
+            entity.Property(e => e.ResidentialCityId)
+                .HasMaxLength(200)
+                .HasColumnName("Residential_CityId");
             entity.Property(e => e.ResidentialPostalCode)
                 .HasMaxLength(50)
                 .HasColumnName("Residential_PostalCode");
-            entity.Property(e => e.ResidentialStateId).HasColumnName("Residential_StateId");
+            entity.Property(e => e.ResidentialStateId)
+                .HasMaxLength(200)
+                .HasColumnName("Residential_StateId");
             entity.Property(e => e.SkypeName)
                 .HasMaxLength(15)
                 .HasColumnName("Skype_Name");

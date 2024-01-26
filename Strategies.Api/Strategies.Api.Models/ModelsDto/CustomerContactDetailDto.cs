@@ -28,15 +28,15 @@ namespace Strategies.Api.Models.ModelsDto
 
         public string? PostalAddress { get; set; }
 
-        public int? ResidentialStateId { get; set; }
+        public string? ResidentialStateId { get; set; }
 
-        public int? ResidentialCityId { get; set; }
+        public string? ResidentialCityId { get; set; }
 
         public string? ResidentialPostalCode { get; set; }
 
-        public int? PostalStateId { get; set; }
+        public string? PostalStateId { get; set; }
 
-        public int? PostalCityId { get; set; }
+        public string? PostalCityId { get; set; }
 
         public string? PostalPostalCode { get; set; }
 
