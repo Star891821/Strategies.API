@@ -113,26 +113,25 @@ namespace Strategies.Api.Controllers
                 await _unitOfWork.CompleteAsync();
                 foreach (var partner in customers.Where(x => x.IsPartner == true))
                 {
-                    
+
                     foreach (var customer in result.Customers.Where(x => x.IsPartner == false).ToList())
                     {
                         partner.Pid = customer.CustomerId;
                         partner.FormId = customer.FormId;
                         _unitOfWork.customerService.InsertOrUpdate(_mapper.Map<Customer>(partner));
-                        await _unitOfWork.CompleteAsync();
+                        _unitOfWork.Complete();
                     }
                 }
                 foreach (var partnerContacts in customerContactDetailDtos.Where(x => x.IsPartner == true))
                 {
-                    foreach (var customerContact in result.CustomerContactDetails.Where(x => x.IsPartner== false).ToList())
+                    foreach (var customerContact in result.CustomerContactDetails.Where(x => x.IsPartner == false).ToList())
                     {
                         partnerContacts.Pid = customerContact.CustomerContactId;
-                        partnerContacts.CustomerId = customerContact.CustomerId;
                         partnerContacts.FormId = customerContact.FormId;
                         _unitOfWork.customerContactDetailsService.InsertOrUpdate(_mapper.Map<CustomerContactDetail>(partnerContacts));
-                        await _unitOfWork.CompleteAsync();
+                        _unitOfWork.Complete();
                     }
-                  
+
                 }
                 foreach (var partnerEmploymentDetails in employmentDetailDtos.Where(x => x.IsPartner == true))
                 {
@@ -141,9 +140,9 @@ namespace Strategies.Api.Controllers
                         partnerEmploymentDetails.Pid = employment.EmpId;
                         partnerEmploymentDetails.FormId = employment.FormId;
                         _unitOfWork.employmentService.InsertOrUpdate(_mapper.Map<EmploymentDetail>(partnerEmploymentDetails));
-                        await _unitOfWork.CompleteAsync();
+                        _unitOfWork.Complete();
                     }
-                  
+
                 }
 
                 _unitOfWork.CommitTransaction();

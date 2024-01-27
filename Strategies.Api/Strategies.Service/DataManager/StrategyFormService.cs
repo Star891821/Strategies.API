@@ -33,13 +33,49 @@ namespace Strategies.Service.DataManager
                     else
                     {
                         context.Entry(existingEntity).CurrentValues.SetValues(entity);
-
+                        if (existingEntity.Customers.Where(x => x.IsPartner == true).Count() > 0
+                            && entity.Customers.Where(x => x.IsPartner == true).Count() == 0)
+                        {
+                            foreach (var customer in existingEntity.Customers.Where(x => x.IsPartner == true))
+                            {
+                                entity.Customers.Add(customer);
+                            }
+                        }
+                        if (existingEntity.CustomerContactDetails.Where(x => x.IsPartner == true).Count() > 0
+                           && entity.CustomerContactDetails.Where(x => x.IsPartner == true).Count() == 0)
+                        {
+                            foreach (var customer in existingEntity.CustomerContactDetails.Where(x => x.IsPartner == true))
+                            {
+                                entity.CustomerContactDetails.Add(customer);
+                            }
+                        }
+                        if (existingEntity.EmploymentDetails.Where(x => x.IsPartner == true).Count() > 0
+                           && entity.EmploymentDetails.Where(x => x.IsPartner == true).Count() == 0)
+                        {
+                            foreach (var customer in existingEntity.EmploymentDetails.Where(x => x.IsPartner == true))
+                            {
+                                entity.EmploymentDetails.Add(customer);
+                            }
+                        }
                         UpdateChildEntities(existingEntity.Customers, entity.Customers, (a, b) => a.CustomerId == b.CustomerId);
                         UpdateChildEntities(existingEntity.CustomerContactDetails, entity.CustomerContactDetails, (a, b) => a.CustomerContactId == b.CustomerContactId);
                         UpdateChildEntities(existingEntity.CashFlowRequirements, entity.CashFlowRequirements, (a, b) => a.CashflowId == b.CashflowId);
                         UpdateChildEntities(existingEntity.PlannedExpenditures, entity.PlannedExpenditures, (a, b) => a.PlannedExpenditureId == b.PlannedExpenditureId);
                         UpdateChildEntities(existingEntity.ExpectedFutureInflows, entity.ExpectedFutureInflows, (a, b) => a.ExpectedFutureInflowsId == b.ExpectedFutureInflowsId);
-                        
+                        UpdateChildEntities(existingEntity.IncomeDetails, entity.IncomeDetails, (a, b) => a.IncomeDetailsId == b.IncomeDetailsId);
+                        UpdateChildEntities(existingEntity.ExpenseDetails, entity.ExpenseDetails, (a, b) => a.ExpenseDetailsId == b.ExpenseDetailsId);
+                        UpdateChildEntities(existingEntity.EmploymentDetails, entity.EmploymentDetails, (a, b) => a.EmpId == b.EmpId);
+                        UpdateChildEntities(existingEntity.LifeStyleAssetDetails, entity.LifeStyleAssetDetails, (a, b) => a.LifeStyleAssetDetailsId == b.LifeStyleAssetDetailsId);
+                        UpdateChildEntities(existingEntity.InvestmentAssetDetails, entity.InvestmentAssetDetails, (a, b) => a.InvestmentAssetDetailsId == b.InvestmentAssetDetailsId);
+                        UpdateChildEntities(existingEntity.LiabilitiesDetails, entity.LiabilitiesDetails, (a, b) => a.LiabilitiesDetailsId == b.LiabilitiesDetailsId);
+                        UpdateChildEntities(existingEntity.SuperAssetDetails, entity.SuperAssetDetails, (a, b) => a.SuperAssetDetailsId == b.SuperAssetDetailsId);
+                        UpdateChildEntities(existingEntity.InsuranceDetails, entity.InsuranceDetails, (a, b) => a.InsuranceId == b.InsuranceId);
+                        UpdateChildEntities(existingEntity.DependantsDetails, entity.DependantsDetails, (a, b) => a.DependantsDetailsId == b.DependantsDetailsId);
+                        UpdateChildEntities(existingEntity.EstatePlannings, entity.EstatePlannings, (a, b) => a.EstatePlanningId == b.EstatePlanningId);
+                        UpdateChildEntities(existingEntity.AssociatedStructures, entity.AssociatedStructures, (a, b) => a.AssociatedStructuresId == b.AssociatedStructuresId);
+                        UpdateChildEntities(existingEntity.ProfessionalAdvisersDetails, entity.ProfessionalAdvisersDetails, (a, b) => a.ProfessionalAdvisersDetailsId == b.ProfessionalAdvisersDetailsId);
+
+
                     }
                 }
                 else
@@ -150,7 +186,7 @@ namespace Strategies.Service.DataManager
                     dbSet.Entry(admissionForm).Collection(adm => adm.EstatePlannings).Load();
                     dbSet.Entry(admissionForm).Collection(adm => adm.AssociatedStructures).Load();
                     dbSet.Entry(admissionForm).Collection(adm => adm.ProfessionalAdvisersDetails).Load();
-                   // dbSet.Entry(admissionForm).Collection(adm => adm.Disasquentionnaires).Load();
+                    // dbSet.Entry(admissionForm).Collection(adm => adm.Disasquentionnaires).Load();
                 }
 
             }

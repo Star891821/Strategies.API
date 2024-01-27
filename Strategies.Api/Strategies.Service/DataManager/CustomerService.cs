@@ -24,10 +24,10 @@ namespace Strategies.Service.DataManager
         {
             using (var dbContext = new StrategyDbContext())
             {
-                return dbContext.Customers.Where(c=>c.CustomerId == id).FirstOrDefault();
+                return dbContext.Customers.Where(c => c.CustomerId == id).FirstOrDefault();
             }
         }
-       
+
         public bool InsertOrUpdate(Customer entity)
         {
             try
@@ -51,7 +51,11 @@ namespace Strategies.Service.DataManager
                 }
                 else
                 {
-                     base.InsertOrUpdate(entity);
+                    //if (entity.CustomerId > 0)
+                    //{
+                    //    entity.CustomerId = 0;
+                    //}
+                    base.InsertOrUpdate(entity);
                 }
 
                 return true;
