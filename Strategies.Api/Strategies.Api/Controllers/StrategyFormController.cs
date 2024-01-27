@@ -113,25 +113,37 @@ namespace Strategies.Api.Controllers
                 await _unitOfWork.CompleteAsync();
                 foreach (var partner in customers.Where(x => x.IsPartner == true))
                 {
-                    partner.Pid = result.Customers.First().CustomerId;
-                    partner.FormId = result.Customers.First().FormId;
-                    _unitOfWork.customerService.InsertOrUpdate(_mapper.Map<Customer>(partner));
-                    await _unitOfWork.CompleteAsync();
+                    
+                    foreach (var customer in result.Customers.Where(x => x.IsPartner == false).ToList())
+                    {
+                        partner.Pid = customer.CustomerId;
+                        partner.FormId = customer.FormId;
+                        _unitOfWork.customerService.InsertOrUpdate(_mapper.Map<Customer>(partner));
+                        await _unitOfWork.CompleteAsync();
+                    }
                 }
                 foreach (var partnerContacts in customerContactDetailDtos.Where(x => x.IsPartner == true))
                 {
-                    partnerContacts.Pid = result.CustomerContactDetails.First().CustomerContactId;
-                    partnerContacts.CustomerId = result.Customers.First().CustomerId;
-                    partnerContacts.FormId = result.Customers.First().FormId;
-                    _unitOfWork.customerContactDetailsService.InsertOrUpdate(_mapper.Map<CustomerContactDetail>(partnerContacts));
-                    await _unitOfWork.CompleteAsync();
+                    foreach (var customerContact in result.CustomerContactDetails.Where(x => x.IsPartner== false).ToList())
+                    {
+                        partnerContacts.Pid = customerContact.CustomerContactId;
+                        partnerContacts.CustomerId = customerContact.CustomerId;
+                        partnerContacts.FormId = customerContact.FormId;
+                        _unitOfWork.customerContactDetailsService.InsertOrUpdate(_mapper.Map<CustomerContactDetail>(partnerContacts));
+                        await _unitOfWork.CompleteAsync();
+                    }
+                  
                 }
                 foreach (var partnerEmploymentDetails in employmentDetailDtos.Where(x => x.IsPartner == true))
                 {
-                    partnerEmploymentDetails.Pid = result.EmploymentDetails.First().EmpId;
-                    partnerEmploymentDetails.FormId = result.Customers.First().FormId;
-                    _unitOfWork.employmentService.InsertOrUpdate(_mapper.Map<EmploymentDetail>(partnerEmploymentDetails));
-                    await _unitOfWork.CompleteAsync();
+                    foreach (var employment in result.EmploymentDetails.Where(x => x.IsPartner == false).ToList())
+                    {
+                        partnerEmploymentDetails.Pid = employment.EmpId;
+                        partnerEmploymentDetails.FormId = employment.FormId;
+                        _unitOfWork.employmentService.InsertOrUpdate(_mapper.Map<EmploymentDetail>(partnerEmploymentDetails));
+                        await _unitOfWork.CompleteAsync();
+                    }
+                  
                 }
 
                 _unitOfWork.CommitTransaction();
