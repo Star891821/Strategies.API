@@ -95,32 +95,43 @@ namespace Strategies.Service.DataManager
         private void UpdateChildEntities<T>(ICollection<T> existingCollection, ICollection<T> updatedCollection, Func<T, T, bool> areEqual)
     where T : class
         {
-            // Delete functionality
-            var itemsToRemove = existingCollection
-                .Where(existingItem => !updatedCollection.Any(updatedItem => areEqual(existingItem, updatedItem)))
-                .ToList();
-
-            foreach (var itemToRemove in itemsToRemove)
+            if (existingCollection.Count == 0 && updatedCollection.Count > 0)
             {
-                context.Entry(itemToRemove).State = EntityState.Deleted;
-                existingCollection.Remove(itemToRemove);
-            }
-
-            // Update and add new
-            foreach (var updatedItem in updatedCollection)
-            {
-                var existingItem = existingCollection.FirstOrDefault(e => areEqual(e, updatedItem));
-
-                if (existingItem != null)
+                foreach (var updatedItem in updatedCollection)
                 {
-                    context.Entry(existingItem).CurrentValues.SetValues(updatedItem);
-                }
-                else
-                {
-                    existingCollection.Add(updatedItem);
                     context.Entry(updatedItem).State = EntityState.Added;
                 }
             }
+            else
+            {
+                // Delete functionality
+                var itemsToRemove = existingCollection
+                .Where(existingItem => !updatedCollection.Any(updatedItem => areEqual(existingItem, updatedItem)))
+                .ToList();
+
+                foreach (var itemToRemove in itemsToRemove)
+                {
+                    context.Entry(itemToRemove).State = EntityState.Deleted;
+                    existingCollection.Remove(itemToRemove);
+                }
+
+                // Update and add new
+                foreach (var updatedItem in updatedCollection)
+                {
+                    var existingItem = existingCollection.FirstOrDefault(e => areEqual(e, updatedItem));
+
+                    if (existingItem != null)
+                    {
+                        context.Entry(existingItem).CurrentValues.SetValues(updatedItem);
+                    }
+                    else
+                    {
+                        existingCollection.Add(updatedItem);
+                        context.Entry(updatedItem).State = EntityState.Added;
+                    }
+                }
+            }
+          
         }
 
         private void UpdateSiblingEntities<T>(ICollection<T> existingCollection, ICollection<T> updatedCollection, Func<T, T, bool> areEqual)
