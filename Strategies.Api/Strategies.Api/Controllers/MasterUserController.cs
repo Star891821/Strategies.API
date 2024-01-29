@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using Strategies.Api.Models.ModelsDto;
 using Strategies.Service.DataManager;
 using Strategies.Service.Interfaces;
@@ -140,17 +141,17 @@ namespace Strategies.Api.Controllers
                 if (string.IsNullOrEmpty(item))
                 {
                     statusCode = StatusCodes.Status404NotFound;
-                    value = new { Values = "", Message = "InsertOrUpdate data is not found", StatusCode = statusCode };
+                    value = new { UserId = "",Values = "", Message = "InsertOrUpdate data is not found", StatusCode = statusCode };
                 }
                 else
                 {
-                    value = new { Values = item, Message = "Success", StatusCode = statusCode };
+                    value = new { UserId =values.UserId, Values = item, Message = "Success", StatusCode = statusCode };
                 }
             }
             catch (Exception ex)
             {
                 statusCode = StatusCodes.Status500InternalServerError;
-                value = new { Values = "", Message = ex.Message, StatusCode = statusCode };
+                value = new { UserId ="", Values = "", Message = ex.Message, StatusCode = statusCode };
             }
             
             return StatusCode(statusCode, value);

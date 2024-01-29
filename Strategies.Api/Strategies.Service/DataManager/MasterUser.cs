@@ -323,6 +323,7 @@ namespace Strategies.Service.DataManager
                         {
                             dbContext.MstUsers.Add(_mapper.Map<MstUser>(entity));
                             dbContext.SaveChanges();
+                            entity.UserId = dbContext.MstUsers.OrderBy(x => x.UserId).Last().UserId;
                             return "User Added Successfully";
                         }
                         else
