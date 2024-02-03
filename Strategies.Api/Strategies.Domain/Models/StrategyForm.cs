@@ -52,6 +52,4 @@ public partial class StrategyForm
     public virtual ICollection<ProfessionalAdvisersDetail> ProfessionalAdvisersDetails { get; set; } = new List<ProfessionalAdvisersDetail>();
 
     public virtual ICollection<SuperAssetDetail> SuperAssetDetails { get; set; } = new List<SuperAssetDetail>();
-
-    public virtual ICollection<WillDetail> WillDetails { get; set; } = new List<WillDetail>();
 }

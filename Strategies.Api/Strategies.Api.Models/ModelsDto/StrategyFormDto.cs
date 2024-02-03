@@ -52,7 +52,7 @@
 
         public virtual List<ProfessionalAdvisersDetailDto> ProfessionalAdvisersDetails { get; set; }
 
-        public virtual List<WillDetailDto> WillDetails { get; set; } 
+        //public virtual List<WillDetailDto> WillDetails { get; set; } 
 
         //  public virtual List<DisasquentionnaireDto> Disasquentionnaires { get; set; }
     }

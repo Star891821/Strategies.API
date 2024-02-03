@@ -21,7 +21,7 @@ namespace Strategies.Api.AutoMapper
             CreateMap<AssociatedStructure, AssociatedStructureDto>().ReverseMap();
             CreateMap<ProfessionalAdvisersDetail, ProfessionalAdvisersDetailDto>().ReverseMap();
           //  CreateMap<Disasquentionnaire, DisasquentionnaireDto>().ReverseMap();
-            CreateMap<WillDetail, WillDetailDto>().ReverseMap();
+         //   CreateMap<WillDetail, WillDetailDto>().ReverseMap();
 
             CreateMap<CustomerContactDetail, CustomerContactDetailDto>().ReverseMap();
             CreateMap<ExpenseDetail, ExpenseDetailDto>().ReverseMap();

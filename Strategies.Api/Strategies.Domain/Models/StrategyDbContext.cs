@@ -61,8 +61,6 @@ public partial class StrategyDbContext : DbContext
 
     public virtual DbSet<UserRegistration> UserRegistrations { get; set; }
 
-    public virtual DbSet<WillDetail> WillDetails { get; set; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=MSI;Initial Catalog=StrategyDB;User Id=sa;Password=1992;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;Integrated Security=false;");
@@ -306,35 +304,71 @@ public partial class StrategyDbContext : DbContext
 
         modelBuilder.Entity<EstatePlanning>(entity =>
         {
-            entity.HasKey(e => e.EstatePlanningId).HasName("PK__EstatePl__977D3057488F04C3");
+            entity.HasKey(e => e.EstatePlanningId).HasName("PK__EstatePl__977D3057C2459697");
 
             entity.ToTable("EstatePlanning");
 
             entity.Property(e => e.EstatePlanningId).HasColumnName("EstatePlanning_id");
+            entity.Property(e => e.AdvanceCareDirective)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("Advance_Care_Directive");
+            entity.Property(e => e.BeneficiaryOfYourEstate)
+                .HasMaxLength(255)
+                .HasColumnName("Beneficiary_Of_Your_Estate");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
             entity.Property(e => e.CreatedBy).HasColumnName("created_by");
-            entity.Property(e => e.EstatePlanningStatus)
+            entity.Property(e => e.DateGuardianshipCompleted)
+                .HasColumnType("datetime")
+                .HasColumnName("Date_Guardianship_Completed");
+            entity.Property(e => e.DateOfWill)
+                .HasColumnType("datetime")
+                .HasColumnName("Date_Of_Will");
+            entity.Property(e => e.EnduringGuardianName)
                 .HasMaxLength(255)
-                .HasColumnName("EstatePlanning_status");
+                .HasColumnName("Enduring_Guardian_Name");
+            entity.Property(e => e.ExecutorOfWill)
+                .HasMaxLength(255)
+                .HasColumnName("Executor_Of_Will");
             entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.FuneralPlan)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("Funeral_Plan");
+            entity.Property(e => e.HaveYouAppointedAnEnduringGuardian)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("Have_You_Appointed_An_Enduring_Guardian");
             entity.Property(e => e.IsJoint).HasDefaultValueSql("((0))");
+            entity.Property(e => e.IsWillCurrent)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("Is_Will_Current");
+            entity.Property(e => e.LastReviewed)
+                .HasMaxLength(255)
+                .HasColumnName("Last_Reviewed");
             entity.Property(e => e.ModifiedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
             entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
             entity.Property(e => e.Notes).HasMaxLength(255);
             entity.Property(e => e.Owners).HasMaxLength(50);
-            entity.Property(e => e.PlanningType)
+            entity.Property(e => e.PowerAttorney)
                 .HasMaxLength(255)
-                .HasColumnName("Planning_Type");
+                .HasColumnName("Power_Attorney");
+            entity.Property(e => e.TestamentaryTrust)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("Testamentary_Trust");
+            entity.Property(e => e.WillExists)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("Will_Exists");
+            entity.Property(e => e.WillLocation)
+                .HasMaxLength(255)
+                .HasColumnName("Will_Location");
 
             entity.HasOne(d => d.Form).WithMany(p => p.EstatePlannings)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__EstatePla__form___3C34F16F");
+                .HasConstraintName("FK__EstatePla__form___7849DB76");
         });
 
         modelBuilder.Entity<ExpectedFutureInflow>(entity =>
@@ -854,44 +888,6 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.RegisterType)
                 .HasMaxLength(255)
                 .HasColumnName("register_type");
-        });
-
-        modelBuilder.Entity<WillDetail>(entity =>
-        {
-            entity.HasKey(e => e.WillId).HasName("PK__WillDeta__F395B5DBD7843B8D");
-
-            entity.Property(e => e.WillId).HasColumnName("will_id");
-            entity.Property(e => e.BeneficiaryOfYourEstate)
-                .HasMaxLength(255)
-                .HasColumnName("Beneficiary_Of_Your_Estate");
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime")
-                .HasColumnName("created_at");
-            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
-            entity.Property(e => e.DateOfWill)
-                .HasColumnType("datetime")
-                .HasColumnName("Date_Of_Will");
-            entity.Property(e => e.ExecutorOfWill)
-                .HasMaxLength(255)
-                .HasColumnName("Executor_Of_Will");
-            entity.Property(e => e.FormId).HasColumnName("form_id");
-            entity.Property(e => e.IsWillCurrent)
-                .HasMaxLength(255)
-                .HasColumnName("Is_Will_Current");
-            entity.Property(e => e.ModifiedAt)
-                .HasColumnType("datetime")
-                .HasColumnName("modified_at");
-            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
-            entity.Property(e => e.Owners).HasMaxLength(100);
-            entity.Property(e => e.WillLocation)
-                .HasMaxLength(255)
-                .HasColumnName("Will_Location");
-
-            entity.HasOne(d => d.Form).WithMany(p => p.WillDetails)
-                .HasForeignKey(d => d.FormId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__WillDetai__form___6DCC4D03");
         });
 
         OnModelCreatingPartial(modelBuilder);
