@@ -20,6 +20,16 @@
 
         public string? Comments { get; set; }
 
+        public string? SumInsured { get; set; }
+
+        public string? PremiumFrequency { get; set; }
+
+        public string? BenefitPeriod { get; set; }
+
+        public string? WaitingPeriod { get; set; }
+
+        public string? OtherDescription { get; set; }
+
         public DateTime? CreatedAt { get; set; }
 
         public int? CreatedBy { get; set; }

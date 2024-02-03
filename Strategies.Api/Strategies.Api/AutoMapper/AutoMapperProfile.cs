@@ -10,7 +10,7 @@ namespace Strategies.Api.AutoMapper
         {
             CreateMap<StrategyForm, StrategyFormDto>().ReverseMap();
             CreateMap<Customer, CustomerDto>().ReverseMap();
-
+           
             CreateMap<LifeStyleAssetDetail, LifeStyleAssetDetailDto>().ReverseMap();
             CreateMap<InvestmentAssetDetail, InvestmentAssetDetailDto>().ReverseMap();
             CreateMap<LiabilitiesDetail, LiabilitiesDetailDto>().ReverseMap();
@@ -20,8 +20,8 @@ namespace Strategies.Api.AutoMapper
             CreateMap<EstatePlanning, EstatePlanningDto>().ReverseMap();
             CreateMap<AssociatedStructure, AssociatedStructureDto>().ReverseMap();
             CreateMap<ProfessionalAdvisersDetail, ProfessionalAdvisersDetailDto>().ReverseMap();
-            CreateMap<Disasquentionnaire, DisasquentionnaireDto>().ReverseMap();
-
+          //  CreateMap<Disasquentionnaire, DisasquentionnaireDto>().ReverseMap();
+            CreateMap<WillDetail, WillDetailDto>().ReverseMap();
 
             CreateMap<CustomerContactDetail, CustomerContactDetailDto>().ReverseMap();
             CreateMap<ExpenseDetail, ExpenseDetailDto>().ReverseMap();

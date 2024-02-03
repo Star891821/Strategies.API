@@ -61,6 +61,8 @@ public partial class StrategyDbContext : DbContext
 
     public virtual DbSet<UserRegistration> UserRegistrations { get; set; }
 
+    public virtual DbSet<WillDetail> WillDetails { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=MSI;Initial Catalog=StrategyDB;User Id=sa;Password=1992;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;Integrated Security=false;");
@@ -436,6 +438,9 @@ public partial class StrategyDbContext : DbContext
             entity.HasKey(e => e.InsuranceId).HasName("PK__Insuranc__58B60F458F92A27F");
 
             entity.Property(e => e.InsuranceId).HasColumnName("insurance_id");
+            entity.Property(e => e.BenefitPeriod)
+                .HasMaxLength(250)
+                .HasColumnName("benefit_period");
             entity.Property(e => e.Comments).HasMaxLength(255);
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
@@ -449,16 +454,26 @@ public partial class StrategyDbContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("modified_at");
             entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.OtherDescription)
+                .HasMaxLength(250)
+                .HasColumnName("other_description");
             entity.Property(e => e.Owners).HasMaxLength(50);
             entity.Property(e => e.PremiumAmount)
                 .HasMaxLength(255)
                 .HasColumnName("premium_amount");
+            entity.Property(e => e.PremiumFrequency)
+                .HasMaxLength(200)
+                .HasColumnName("premium_frequency");
             entity.Property(e => e.PremiumType)
                 .HasMaxLength(255)
                 .HasColumnName("premium_type");
+            entity.Property(e => e.SumInsured).HasMaxLength(250);
             entity.Property(e => e.Super)
                 .HasMaxLength(255)
                 .HasColumnName("super");
+            entity.Property(e => e.WaitingPeriod)
+                .HasMaxLength(250)
+                .HasColumnName("waiting_period");
 
             entity.HasOne(d => d.Form).WithMany(p => p.InsuranceDetails)
                 .HasForeignKey(d => d.FormId)
@@ -839,6 +854,44 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.RegisterType)
                 .HasMaxLength(255)
                 .HasColumnName("register_type");
+        });
+
+        modelBuilder.Entity<WillDetail>(entity =>
+        {
+            entity.HasKey(e => e.WillId).HasName("PK__WillDeta__F395B5DBD7843B8D");
+
+            entity.Property(e => e.WillId).HasColumnName("will_id");
+            entity.Property(e => e.BeneficiaryOfYourEstate)
+                .HasMaxLength(255)
+                .HasColumnName("Beneficiary_Of_Your_Estate");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.DateOfWill)
+                .HasColumnType("datetime")
+                .HasColumnName("Date_Of_Will");
+            entity.Property(e => e.ExecutorOfWill)
+                .HasMaxLength(255)
+                .HasColumnName("Executor_Of_Will");
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.IsWillCurrent)
+                .HasMaxLength(255)
+                .HasColumnName("Is_Will_Current");
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Owners).HasMaxLength(100);
+            entity.Property(e => e.WillLocation)
+                .HasMaxLength(255)
+                .HasColumnName("Will_Location");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.WillDetails)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__WillDetai__form___6DCC4D03");
         });
 
         OnModelCreatingPartial(modelBuilder);

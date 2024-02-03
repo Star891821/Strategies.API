@@ -31,5 +31,15 @@ public partial class InsuranceDetail
 
     public bool? IsJoint { get; set; }
 
+    public string? SumInsured { get; set; }
+
+    public string? PremiumFrequency { get; set; }
+
+    public string? BenefitPeriod { get; set; }
+
+    public string? WaitingPeriod { get; set; }
+
+    public string? OtherDescription { get; set; }
+
     public virtual StrategyForm Form { get; set; } = null!;
 }
