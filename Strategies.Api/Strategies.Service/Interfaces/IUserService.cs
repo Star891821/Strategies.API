@@ -12,5 +12,7 @@ namespace Strategies.Service.Interfaces
         bool IsOtpExpired(string EmailId);
         bool UpdatePassword(string newPassword, string EmailId);
         bool IsOtpValid(string EmailId, string OTP);
+
+        T? ValidateUser(int UserId,string Password);
     }
 }

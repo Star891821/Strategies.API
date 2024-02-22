@@ -50,6 +50,42 @@ namespace Strategies.Api.Controllers
             return StatusCode(statusCode, value);
         }
 
+        [HttpGet()]
+        [AllowAnonymous]
+        public IActionResult? ValidateUser(int UserId,string password)
+        {
+            var statusCode = StatusCodes.Status200OK;
+            object? value = null;
+            try
+            {
+                if (UserId == 0 || string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password))
+                {
+                    statusCode = StatusCodes.Status404NotFound;
+                    value = new { Values = "", Message = "Input Data is not valid", StatusCode = statusCode };
+                }
+                else
+                {
+                    var item = userService.ValidateUser(UserId, password);
+                    if (item == null)
+                    {
+                        statusCode = StatusCodes.Status404NotFound;
+                        value = new { Values = "", Message = "User data is not found", StatusCode = statusCode };
+                    }
+                    else
+                    {
+                        value = new { Values = item, Message = "Success", StatusCode = statusCode };
+                    }
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                statusCode = StatusCodes.Status500InternalServerError;
+                value = new { Values = "", Message = ex.Message, StatusCode = statusCode };
+            }
+            return StatusCode(statusCode, value);
+        }
+
 
         [HttpPost]
       //  [Authorize]
