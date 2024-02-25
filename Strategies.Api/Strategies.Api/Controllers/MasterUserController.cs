@@ -52,20 +52,20 @@ namespace Strategies.Api.Controllers
 
         [HttpGet()]
         [AllowAnonymous]
-        public IActionResult? ValidateUser(int UserId,string password)
+        public IActionResult? ValidateUser(string UserName,string password)
         {
             var statusCode = StatusCodes.Status200OK;
             object? value = null;
             try
             {
-                if (UserId == 0 || string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password))
+                if (string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password))
                 {
                     statusCode = StatusCodes.Status404NotFound;
                     value = new { Values = "", Message = "Input Data is not valid", StatusCode = statusCode };
                 }
                 else
                 {
-                    var item = userService.ValidateUser(UserId, password);
+                    var item = userService.ValidateUser(UserName, password);
                     if (item == null)
                     {
                         statusCode = StatusCodes.Status404NotFound;

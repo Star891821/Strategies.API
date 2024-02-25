@@ -350,18 +350,20 @@ namespace Strategies.Service.DataManager
             return DateTime.Now > otpCreationTime.Value.AddMinutes(otpExpirationMinutes);
         }
 
-        public MstUserDto? ValidateUser(int UserId, string Password)
+        public MstUserDto? ValidateUser(string UserName, string Password)
         {
             using (var dbContext = new StrategyDbContext())
             {
 
-                if (UserId != 0)
+                if (!string.IsNullOrEmpty(UserName))
                 {
-                    var dbentity = dbContext.MstUsers.FirstOrDefault(e => e.UserId == UserId && 
+                    var dbentity = dbContext.MstUsers.FirstOrDefault(e => e.Username == UserName && 
                     e.Userpassword == Password);
                     if (dbentity != null)
                     {
-                        return _mapper.Map<MstUserDto>(dbentity);
+                        var result = _mapper.Map<MstUserDto>(dbentity);
+                        result.Userpassword = string.Empty;
+                        return result;
                         
                     }
                 }

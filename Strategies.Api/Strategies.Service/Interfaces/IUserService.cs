@@ -13,6 +13,6 @@ namespace Strategies.Service.Interfaces
         bool UpdatePassword(string newPassword, string EmailId);
         bool IsOtpValid(string EmailId, string OTP);
 
-        T? ValidateUser(int UserId,string Password);
+        T? ValidateUser(string UserName,string Password);
     }
 }
