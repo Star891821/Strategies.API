@@ -822,7 +822,6 @@ public partial class StrategyDbContext : DbContext
                 .HasColumnName("modified_at");
             entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
             entity.Property(e => e.Step).HasColumnName("step");
-            entity.Property(e => e.UserId).HasColumnName("user_id");
         });
 
         modelBuilder.Entity<SuperAssetDetail>(entity =>

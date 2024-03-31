@@ -19,8 +19,6 @@ public partial class StrategyForm
 
     public int? Step { get; set; }
 
-    public int? UserId { get; set; }
-
     public virtual ICollection<AssociatedStructure> AssociatedStructures { get; set; } = new List<AssociatedStructure>();
 
     public virtual ICollection<CashFlowRequirement> CashFlowRequirements { get; set; } = new List<CashFlowRequirement>();
