@@ -21,6 +21,14 @@ namespace Strategies.Service.DataManager
             return await dbSet.ToListAsync();
         }
 
+        public virtual async Task<List<T>> GetbyUserId(int userId)
+        {
+            return await dbSet
+                .Where(entity => entity.Equals(userId)) 
+                .ToListAsync();
+        }
+
+
         public virtual async Task<List<T>> GetAll(int id)
         {
             return await dbSet.Where(e => e.Equals(id)).ToListAsync();

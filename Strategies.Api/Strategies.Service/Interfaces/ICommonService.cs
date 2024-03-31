@@ -6,6 +6,7 @@ namespace Strategies.Service.Interfaces
     public interface ICommonService<T> where T : class
     {
         Task<List<T>> GetAll();
+        Task<List<T>> GetbyUserId(int userId);
         Task<List<T>> GetAll(int id);
         Task<T> GetById(int id);
         Task<bool> InsertOrUpdateRange(List<T> entity);

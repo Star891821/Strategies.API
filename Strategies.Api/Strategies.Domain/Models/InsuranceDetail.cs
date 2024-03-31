@@ -37,9 +37,9 @@ public partial class InsuranceDetail
 
     public string? BenefitPeriod { get; set; }
 
-    public string? WaitingPeriod { get; set; }
-
     public string? OtherDescription { get; set; }
+
+    public string? WaitingPeriod { get; set; }
 
     public virtual StrategyForm Form { get; set; } = null!;
 }

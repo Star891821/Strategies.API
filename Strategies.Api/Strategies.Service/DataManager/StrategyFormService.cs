@@ -165,6 +165,17 @@ namespace Strategies.Service.DataManager
                 .ToListAsync();
         }
 
+        public override async Task<List<StrategyForm>> GetbyUserId(int userId)
+        {
+            return await dbSet.Where(a => a.CreatedBy == userId)
+                 .Include(a => a.Customers)
+                 .Include(a => a.CustomerContactDetails)
+                 .Include(a => a.CashFlowRequirements)
+                 .Include(a => a.PlannedExpenditures)
+                 .Include(a => a.ExpectedFutureInflows)
+                 .ToListAsync();
+        }
+
         private StrategyForm getbyID(int? id, int? UserId, bool userWise = false)
         {
             var admissionForm = new StrategyForm();

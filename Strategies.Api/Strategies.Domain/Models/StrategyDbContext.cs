@@ -61,15 +61,17 @@ public partial class StrategyDbContext : DbContext
 
     public virtual DbSet<UserRegistration> UserRegistrations { get; set; }
 
+    public virtual DbSet<WillDetail> WillDetails { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=MSI;Initial Catalog=StrategyDB;User Id=sa;Password=1992;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;Integrated Security=false;");
+        => optionsBuilder.UseSqlServer("Server=Dell;Initial Catalog=StrategyDB;User Id=sa;Password=sql2019;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;Integrated Security=false;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AssociatedStructure>(entity =>
         {
-            entity.HasKey(e => e.AssociatedStructuresId).HasName("PK__Associat__6BA73EF2D7F1280E");
+            entity.HasKey(e => e.AssociatedStructuresId).HasName("PK__Associat__6BA73EF24B284642");
 
             entity.Property(e => e.AssociatedStructuresId).HasColumnName("AssociatedStructures_id");
             entity.Property(e => e.AssociatedStructuresDetails)
@@ -94,12 +96,12 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.AssociatedStructures)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Associate__form___367C1819");
+                .HasConstraintName("FK__Associate__form___797309D9");
         });
 
         modelBuilder.Entity<CashFlowRequirement>(entity =>
         {
-            entity.HasKey(e => e.CashflowId).HasName("PK__CashFlow__F45074635D682C7E");
+            entity.HasKey(e => e.CashflowId).HasName("PK__CashFlow__F4507463435BF2B1");
 
             entity.Property(e => e.CashflowId).HasColumnName("cashflow_id");
             entity.Property(e => e.Amount).HasMaxLength(255);
@@ -123,7 +125,7 @@ public partial class StrategyDbContext : DbContext
 
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__8CB382B1F64F9EE0");
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__8CB382B1F10122F5");
 
             entity.Property(e => e.CustomerId).HasColumnName("Customer_id");
             entity.Property(e => e.CreatedAt)
@@ -142,7 +144,7 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.HealthStatus)
                 .HasMaxLength(15)
                 .HasColumnName("Health_Status");
-            entity.Property(e => e.IsPartner).HasDefaultValueSql("((0))");
+            entity.Property(e => e.IsPartner).HasDefaultValueSql("((1))");
             entity.Property(e => e.LastloginAt)
                 .HasColumnType("datetime")
                 .HasColumnName("lastlogin_at");
@@ -166,12 +168,12 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.Customers)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Customers__form___4E88ABD4");
+                .HasConstraintName("FK__Customers__form___7D439ABD");
         });
 
         modelBuilder.Entity<CustomerContactDetail>(entity =>
         {
-            entity.HasKey(e => e.CustomerContactId).HasName("PK__Customer__291D4C16300BE985");
+            entity.HasKey(e => e.CustomerContactId).HasName("PK__Customer__291D4C16C1845A08");
 
             entity.Property(e => e.CustomerContactId).HasColumnName("CustomerContact_id");
             entity.Property(e => e.CreatedAt)
@@ -186,7 +188,7 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.HomeTelephone)
                 .HasMaxLength(15)
                 .HasColumnName("Home_Telephone");
-            entity.Property(e => e.IsPartner).HasDefaultValueSql("((0))");
+            entity.Property(e => e.IsPartner).HasDefaultValueSql("((1))");
             entity.Property(e => e.MobileTelephone)
                 .HasMaxLength(15)
                 .HasColumnName("Mobile_Telephone");
@@ -229,12 +231,12 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.CustomerContactDetails)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__CustomerC__form___4F7CD00D");
+                .HasConstraintName("FK__CustomerC__form___7C4F7684");
         });
 
         modelBuilder.Entity<DependantsDetail>(entity =>
         {
-            entity.HasKey(e => e.DependantsDetailsId).HasName("PK__Dependan__4B906EF7AEC97D89");
+            entity.HasKey(e => e.DependantsDetailsId).HasName("PK__Dependan__4B906EF71EE16E19");
 
             entity.Property(e => e.DependantsDetailsId).HasColumnName("DependantsDetails_Id");
             entity.Property(e => e.CreatedAt)
@@ -271,12 +273,12 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.DependantsDetails)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Dependant__form___395884C4");
+                .HasConstraintName("FK__Dependant__form___7E37BEF6");
         });
 
         modelBuilder.Entity<EmploymentDetail>(entity =>
         {
-            entity.HasKey(e => e.EmpId).HasName("PK__Employme__1299A8617CB1D9B4");
+            entity.HasKey(e => e.EmpId).HasName("PK__Employme__1299A861BDC6011A");
 
             entity.Property(e => e.EmpId).HasColumnName("emp_id");
             entity.Property(e => e.CreatedAt)
@@ -299,12 +301,12 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.EmploymentDetails)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Employmen__form___2A164134");
+                .HasConstraintName("FK__Employmen__form___7F2BE32F");
         });
 
         modelBuilder.Entity<EstatePlanning>(entity =>
         {
-            entity.HasKey(e => e.EstatePlanningId).HasName("PK__EstatePl__977D3057C2459697");
+            entity.HasKey(e => e.EstatePlanningId).HasName("PK__EstatePl__977D3057185884C2");
 
             entity.ToTable("EstatePlanning");
 
@@ -339,7 +341,6 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.HaveYouAppointedAnEnduringGuardian)
                 .HasDefaultValueSql("((0))")
                 .HasColumnName("Have_You_Appointed_An_Enduring_Guardian");
-            entity.Property(e => e.IsJoint).HasDefaultValueSql("((0))");
             entity.Property(e => e.IsWillCurrent)
                 .HasDefaultValueSql("((0))")
                 .HasColumnName("Is_Will_Current");
@@ -368,12 +369,12 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.EstatePlannings)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__EstatePla__form___7849DB76");
+                .HasConstraintName("FK__EstatePla__form___00200768");
         });
 
         modelBuilder.Entity<ExpectedFutureInflow>(entity =>
         {
-            entity.HasKey(e => e.ExpectedFutureInflowsId).HasName("PK__Expected__28D8A491A4502C1F");
+            entity.HasKey(e => e.ExpectedFutureInflowsId).HasName("PK__Expected__28D8A49134457D01");
 
             entity.Property(e => e.ExpectedFutureInflowsId).HasColumnName("ExpectedFutureInflows_id");
             entity.Property(e => e.Amount).HasMaxLength(255);
@@ -396,16 +397,16 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.ExpectedFutureInflows)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ExpectedF__form___02084FDA");
+                .HasConstraintName("FK__ExpectedF__form___01142BA1");
 
             entity.HasOne(d => d.Question).WithMany(p => p.ExpectedFutureInflows)
                 .HasForeignKey(d => d.QuestionId)
-                .HasConstraintName("FK__ExpectedF__Quest__69FBBC1F");
+                .HasConstraintName("FK__ExpectedF__Quest__02FC7413");
         });
 
         modelBuilder.Entity<ExpenseDetail>(entity =>
         {
-            entity.HasKey(e => e.ExpenseDetailsId).HasName("PK__ExpenseD__396FAD45E24BAAE4");
+            entity.HasKey(e => e.ExpenseDetailsId).HasName("PK__ExpenseD__396FAD4555B747C7");
 
             entity.Property(e => e.ExpenseDetailsId).HasColumnName("ExpenseDetails_id");
             entity.Property(e => e.Amounts).HasMaxLength(255);
@@ -428,16 +429,16 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.ExpenseDetails)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ExpenseDe__form___32AB8735");
+                .HasConstraintName("FK__ExpenseDe__form___03F0984C");
 
             entity.HasOne(d => d.Question).WithMany(p => p.ExpenseDetails)
                 .HasForeignKey(d => d.QuestionId)
-                .HasConstraintName("FK__ExpenseDe__Quest__339FAB6E");
+                .HasConstraintName("FK__ExpenseDe__Quest__04E4BC85");
         });
 
         modelBuilder.Entity<IncomeDetail>(entity =>
         {
-            entity.HasKey(e => e.IncomeDetailsId).HasName("PK__IncomeDe__E30F8B6E5BC4178F");
+            entity.HasKey(e => e.IncomeDetailsId).HasName("PK__IncomeDe__E30F8B6E5C8879AF");
 
             entity.Property(e => e.IncomeDetailsId).HasColumnName("IncomeDetails_id");
             entity.Property(e => e.Amounts).HasMaxLength(255);
@@ -460,16 +461,16 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.IncomeDetails)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__IncomeDet__form___2DE6D218");
+                .HasConstraintName("FK__IncomeDet__form___05D8E0BE");
 
             entity.HasOne(d => d.Question).WithMany(p => p.IncomeDetails)
                 .HasForeignKey(d => d.QuestionId)
-                .HasConstraintName("FK__IncomeDet__Quest__2EDAF651");
+                .HasConstraintName("FK__IncomeDet__Quest__06CD04F7");
         });
 
         modelBuilder.Entity<InsuranceDetail>(entity =>
         {
-            entity.HasKey(e => e.InsuranceId).HasName("PK__Insuranc__58B60F458F92A27F");
+            entity.HasKey(e => e.InsuranceId).HasName("PK__Insuranc__58B60F457D757375");
 
             entity.Property(e => e.InsuranceId).HasColumnName("insurance_id");
             entity.Property(e => e.BenefitPeriod)
@@ -512,12 +513,12 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.InsuranceDetails)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Insurance__form___3F115E1A");
+                .HasConstraintName("FK__Insurance__form___07C12930");
         });
 
         modelBuilder.Entity<InvestmentAssetDetail>(entity =>
         {
-            entity.HasKey(e => e.InvestmentAssetDetailsId).HasName("PK__Investme__9BA8E40B6DC2755A");
+            entity.HasKey(e => e.InvestmentAssetDetailsId).HasName("PK__Investme__9BA8E40BA2EE678C");
 
             entity.Property(e => e.InvestmentAssetDetailsId).HasColumnName("InvestmentAssetDetails_id");
             entity.Property(e => e.CreatedAt)
@@ -540,12 +541,12 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.InvestmentAssetDetails)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Investmen__form___41EDCAC5");
+                .HasConstraintName("FK__Investmen__form___08B54D69");
         });
 
         modelBuilder.Entity<LiabilitiesDetail>(entity =>
         {
-            entity.HasKey(e => e.LiabilitiesDetailsId).HasName("PK__Liabilit__A2A7927A55ECDEC1");
+            entity.HasKey(e => e.LiabilitiesDetailsId).HasName("PK__Liabilit__A2A7927A57DEC1DF");
 
             entity.Property(e => e.LiabilitiesDetailsId).HasColumnName("LiabilitiesDetails_id");
             entity.Property(e => e.CreatedAt)
@@ -574,12 +575,12 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.LiabilitiesDetails)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Liabiliti__form___44CA3770");
+                .HasConstraintName("FK__Liabiliti__form___09A971A2");
         });
 
         modelBuilder.Entity<LifeStyleAssetDetail>(entity =>
         {
-            entity.HasKey(e => e.LifeStyleAssetDetailsId).HasName("PK__LifeStyl__E73F105B0A899DE3");
+            entity.HasKey(e => e.LifeStyleAssetDetailsId).HasName("PK__LifeStyl__E73F105B7FB9DB95");
 
             entity.Property(e => e.LifeStyleAssetDetailsId).HasColumnName("LifeStyleAssetDetails_id");
             entity.Property(e => e.CreatedAt)
@@ -602,12 +603,12 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.LifeStyleAssetDetails)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__LifeStyle__form___47A6A41B");
+                .HasConstraintName("FK__LifeStyle__form___0A9D95DB");
         });
 
         modelBuilder.Entity<MstQuestion>(entity =>
         {
-            entity.HasKey(e => e.QuestionId).HasName("PK__MstQuest__B0B2E4C68936DA55");
+            entity.HasKey(e => e.QuestionId).HasName("PK__MstQuest__B0B2E4C6CB6D329B");
 
             entity.Property(e => e.QuestionId).HasColumnName("Question_ID");
             entity.Property(e => e.ActiveYn).HasColumnName("activeYN");
@@ -630,7 +631,7 @@ public partial class StrategyDbContext : DbContext
 
         modelBuilder.Entity<MstRoleGroup>(entity =>
         {
-            entity.HasKey(e => e.RolegroupId).HasName("PK__MstRoleG__680F3A921D744EE7");
+            entity.HasKey(e => e.RolegroupId).HasName("PK__MstRoleG__680F3A9260166566");
 
             entity.Property(e => e.RolegroupId).HasColumnName("rolegroup_id");
             entity.Property(e => e.ActiveYn).HasColumnName("activeYN");
@@ -654,12 +655,12 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Role).WithMany(p => p.MstRoleGroups)
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__MstRoleGr__role___4BAC3F29");
+                .HasConstraintName("FK__MstRoleGr__role___0B91BA14");
         });
 
         modelBuilder.Entity<MstUser>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__MstUsers__B9BE370FF718ACF2");
+            entity.HasKey(e => e.UserId).HasName("PK__MstUsers__B9BE370F93A0D043");
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.CreatedAt)
@@ -709,12 +710,12 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Role).WithMany(p => p.MstUsers)
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__MstUsers__role_i__4CA06362");
+                .HasConstraintName("FK__MstUsers__role_i__0C85DE4D");
         });
 
         modelBuilder.Entity<MstUserRole>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__MstUserR__760965CC5F87DAEF");
+            entity.HasKey(e => e.RoleId).HasName("PK__MstUserR__760965CC84C7ACA2");
 
             entity.Property(e => e.RoleId).HasColumnName("role_id");
             entity.Property(e => e.ActiveYn).HasColumnName("activeYN");
@@ -734,7 +735,7 @@ public partial class StrategyDbContext : DbContext
 
         modelBuilder.Entity<PlannedExpenditure>(entity =>
         {
-            entity.HasKey(e => e.PlannedExpenditureId).HasName("PK__PlannedE__8ACB67C663F6F8FA");
+            entity.HasKey(e => e.PlannedExpenditureId).HasName("PK__PlannedE__8ACB67C645190D11");
 
             entity.ToTable("PlannedExpenditure");
 
@@ -759,16 +760,16 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.PlannedExpenditures)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__PlannedEx__form___7E37BEF6");
+                .HasConstraintName("FK__PlannedEx__form___0D7A0286");
 
             entity.HasOne(d => d.Question).WithMany(p => p.PlannedExpenditures)
                 .HasForeignKey(d => d.QuestionId)
-                .HasConstraintName("FK__PlannedEx__Quest__160F4887");
+                .HasConstraintName("FK__PlannedEx__Quest__0F624AF8");
         });
 
         modelBuilder.Entity<ProfessionalAdvisersDetail>(entity =>
         {
-            entity.HasKey(e => e.ProfessionalAdvisersDetailsId).HasName("PK__Professi__A755D23FF68D49A8");
+            entity.HasKey(e => e.ProfessionalAdvisersDetailsId).HasName("PK__Professi__A755D23F95569AEF");
 
             entity.Property(e => e.ProfessionalAdvisersDetailsId).HasColumnName("ProfessionalAdvisersDetails_id");
             entity.Property(e => e.CreatedAt)
@@ -803,7 +804,7 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.ProfessionalAdvisersDetails)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Professio__form___4A8310C6");
+                .HasConstraintName("FK__Professio__form___10566F31");
         });
 
         modelBuilder.Entity<StrategyForm>(entity =>
@@ -821,11 +822,12 @@ public partial class StrategyDbContext : DbContext
                 .HasColumnName("modified_at");
             entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
             entity.Property(e => e.Step).HasColumnName("step");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
         });
 
         modelBuilder.Entity<SuperAssetDetail>(entity =>
         {
-            entity.HasKey(e => e.SuperAssetDetailsId).HasName("PK__SuperAss__BDB5E4D4D9E3E3B1");
+            entity.HasKey(e => e.SuperAssetDetailsId).HasName("PK__SuperAss__BDB5E4D4BC1F818E");
 
             entity.Property(e => e.SuperAssetDetailsId).HasColumnName("SuperAssetDetails_id");
             entity.Property(e => e.Contributions).HasMaxLength(255);
@@ -849,12 +851,12 @@ public partial class StrategyDbContext : DbContext
             entity.HasOne(d => d.Form).WithMany(p => p.SuperAssetDetails)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__SuperAsse__form___4D5F7D71");
+                .HasConstraintName("FK__SuperAsse__form___114A936A");
         });
 
         modelBuilder.Entity<UserRegistration>(entity =>
         {
-            entity.HasKey(e => e.RegisterId).HasName("PK__UserRegi__1418262F264342CA");
+            entity.HasKey(e => e.RegisterId).HasName("PK__UserRegi__1418262F1D3694F7");
 
             entity.ToTable("UserRegistration");
 
@@ -888,6 +890,43 @@ public partial class StrategyDbContext : DbContext
             entity.Property(e => e.RegisterType)
                 .HasMaxLength(255)
                 .HasColumnName("register_type");
+        });
+
+        modelBuilder.Entity<WillDetail>(entity =>
+        {
+            entity.HasKey(e => e.WillId).HasName("PK__WillDeta__F395B5DBB2C9B13C");
+
+            entity.Property(e => e.WillId).HasColumnName("will_id");
+            entity.Property(e => e.BeneficiaryOfYourEstate)
+                .HasMaxLength(255)
+                .HasColumnName("Beneficiary_Of_Your_Estate");
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.CreatedBy).HasColumnName("created_by");
+            entity.Property(e => e.DateOfWill)
+                .HasColumnType("datetime")
+                .HasColumnName("Date_Of_Will");
+            entity.Property(e => e.ExecutorOfWill)
+                .HasMaxLength(255)
+                .HasColumnName("Executor_Of_Will");
+            entity.Property(e => e.FormId).HasColumnName("form_id");
+            entity.Property(e => e.IsWillCurrent)
+                .HasMaxLength(255)
+                .HasColumnName("Is_Will_Current");
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modified_at");
+            entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
+            entity.Property(e => e.Owners).HasMaxLength(100);
+            entity.Property(e => e.WillLocation)
+                .HasMaxLength(255)
+                .HasColumnName("Will_Location");
+
+            entity.HasOne(d => d.Form).WithMany(p => p.WillDetails)
+                .HasForeignKey(d => d.FormId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__WillDetai__form___123EB7A3");
         });
 
         OnModelCreatingPartial(modelBuilder);

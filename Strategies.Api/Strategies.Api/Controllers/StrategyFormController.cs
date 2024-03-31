@@ -93,6 +93,38 @@ namespace Strategies.Api.Controllers
             }
             return StatusCode(statusCode, value);
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetStrategyFormDetailsbyUserId(int userId)
+        {
+            var statusCode = StatusCodes.Status200OK;
+            object? value = null;
+            try
+            {
+                var item = await _unitOfWork.StrategyFormService.GetbyUserId(userId);
+
+                if (item == null)
+                {
+                    statusCode = StatusCodes.Status404NotFound;
+                    value = "GetStrategyFormDetailsbyUserId is not found";
+                }
+                else
+                {
+                    value = GetListOfItemsDto(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                statusCode = StatusCodes.Status500InternalServerError;
+                value = ex.Message;
+            }
+            finally
+            {
+            }
+            return StatusCode(statusCode, value);
+        }
+
         [HttpPost]
         public async Task<IActionResult> InsertOrUpdate(StrategyFormDto strategyFormDto)
         {
