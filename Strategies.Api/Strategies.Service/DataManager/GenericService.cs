@@ -50,6 +50,8 @@ namespace Strategies.Service.DataManager
             return true;
         }
 
+
+
         public virtual async Task<bool> Update(T orginalentity, T entity)
         {
             dbSet.Entry(orginalentity).CurrentValues.SetValues(entity);

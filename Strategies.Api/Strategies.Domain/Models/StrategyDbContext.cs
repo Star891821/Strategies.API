@@ -55,6 +55,28 @@ public partial class StrategyDbContext : DbContext
 
     public virtual DbSet<ProfessionalAdvisersDetail> ProfessionalAdvisersDetails { get; set; }
 
+    public virtual DbSet<SrBusinessInsurance> SrBusinessInsurances { get; set; }
+
+    public virtual DbSet<SrChildrensInsurance> SrChildrensInsurances { get; set; }
+
+    public virtual DbSet<SrDebtReduction> SrDebtReductions { get; set; }
+
+    public virtual DbSet<SrDebtRestructuring> SrDebtRestructurings { get; set; }
+
+    public virtual DbSet<SrGearing> SrGearings { get; set; }
+
+    public virtual DbSet<SrIncomeProtectionInsurance> SrIncomeProtectionInsurances { get; set; }
+
+    public virtual DbSet<SrLifeInsurance> SrLifeInsurances { get; set; }
+
+    public virtual DbSet<SrPowerOfAttorney> SrPowerOfAttorneys { get; set; }
+
+    public virtual DbSet<SrSalarySacrifice> SrSalarySacrifices { get; set; }
+
+    public virtual DbSet<SrTpdinsurance> SrTpdinsurances { get; set; }
+
+    public virtual DbSet<SrWill> SrWills { get; set; }
+
     public virtual DbSet<StrategyForm> StrategyForms { get; set; }
 
     public virtual DbSet<SuperAssetDetail> SuperAssetDetails { get; set; }
@@ -65,7 +87,7 @@ public partial class StrategyDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=Dell;Initial Catalog=StrategyDB;User Id=sa;Password=sql2019;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;Integrated Security=false;");
+        => optionsBuilder.UseSqlServer("Server=Dell\\SQLEXPRESS;Initial Catalog=StrategyDB;User Id=sa;Password=sql2019;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true;Integrated Security=false;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -807,6 +829,129 @@ public partial class StrategyDbContext : DbContext
                 .HasConstraintName("FK__Professio__form___10566F31");
         });
 
+        modelBuilder.Entity<SrBusinessInsurance>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("sr_BusinessInsurance");
+
+            entity.Property(e => e.BusinessInsuranceReview).HasMaxLength(500);
+            entity.Property(e => e.SrReferences).HasColumnName("sr_References");
+            entity.Property(e => e.StrategyName).HasMaxLength(500);
+        });
+
+        modelBuilder.Entity<SrChildrensInsurance>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("sr_ChildrensInsurance");
+
+            entity.Property(e => e.ChildrensInsuranceReview).HasMaxLength(500);
+            entity.Property(e => e.SrReferences).HasColumnName("sr_References");
+            entity.Property(e => e.StrategyName).HasMaxLength(500);
+        });
+
+        modelBuilder.Entity<SrDebtReduction>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("sr_DebtReduction");
+
+            entity.Property(e => e.DebtReductionReview).HasMaxLength(500);
+            entity.Property(e => e.SrReferences).HasColumnName("sr_References");
+            entity.Property(e => e.StrategyName).HasMaxLength(500);
+        });
+
+        modelBuilder.Entity<SrDebtRestructuring>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("sr_DebtRestructuring");
+
+            entity.Property(e => e.DebtRestructuringReview).HasMaxLength(500);
+            entity.Property(e => e.SrReferences).HasColumnName("sr_References");
+            entity.Property(e => e.StrategyName).HasMaxLength(500);
+        });
+
+        modelBuilder.Entity<SrGearing>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("sr_Gearing");
+
+            entity.Property(e => e.GearingReview).HasMaxLength(500);
+            entity.Property(e => e.SrReferences).HasColumnName("sr_References");
+            entity.Property(e => e.StrategyName).HasMaxLength(500);
+        });
+
+        modelBuilder.Entity<SrIncomeProtectionInsurance>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("sr_IncomeProtectionInsurance");
+
+            entity.Property(e => e.IncomeProtectionReview).HasMaxLength(500);
+            entity.Property(e => e.SrReferences).HasColumnName("sr_References");
+            entity.Property(e => e.StrategyName).HasMaxLength(500);
+        });
+
+        modelBuilder.Entity<SrLifeInsurance>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("sr_LifeInsurance");
+
+            entity.Property(e => e.LifeInsuranceReview).HasMaxLength(500);
+            entity.Property(e => e.SrReferences).HasColumnName("sr_References");
+            entity.Property(e => e.StrategyName).HasMaxLength(500);
+        });
+
+        modelBuilder.Entity<SrPowerOfAttorney>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("sr_PowerOfAttorney");
+
+            entity.Property(e => e.PowerOfAttorneyReview).HasMaxLength(500);
+            entity.Property(e => e.SrReferences).HasColumnName("sr_References");
+            entity.Property(e => e.StrategyName).HasMaxLength(500);
+        });
+
+        modelBuilder.Entity<SrSalarySacrifice>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("sr_SalarySacrifice");
+
+            entity.Property(e => e.SalarySacrificeReview).HasMaxLength(500);
+            entity.Property(e => e.SrReferences).HasColumnName("sr_References");
+            entity.Property(e => e.StrategyName).HasMaxLength(500);
+        });
+
+        modelBuilder.Entity<SrTpdinsurance>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("sr_TPDInsurance");
+
+            entity.Property(e => e.SrReferences).HasColumnName("sr_References");
+            entity.Property(e => e.StrategyName).HasMaxLength(500);
+            entity.Property(e => e.TpdinsuranceReview)
+                .HasMaxLength(500)
+                .HasColumnName("TPDInsuranceReview");
+        });
+
+        modelBuilder.Entity<SrWill>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("sr_Will");
+
+            entity.Property(e => e.SrReferences).HasColumnName("sr_References");
+            entity.Property(e => e.StrategyName).HasMaxLength(500);
+            entity.Property(e => e.WillReview).HasMaxLength(500);
+        });
+
         modelBuilder.Entity<StrategyForm>(entity =>
         {
             entity.HasKey(e => e.FormId).HasName("PK__Strategy__190E16C9D64462F9");
@@ -822,6 +967,7 @@ public partial class StrategyDbContext : DbContext
                 .HasColumnName("modified_at");
             entity.Property(e => e.ModifiedBy).HasColumnName("modified_by");
             entity.Property(e => e.Step).HasColumnName("step");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
         });
 
         modelBuilder.Entity<SuperAssetDetail>(entity =>

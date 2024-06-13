@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Strategies.Api.Models.ModelsDto;
 using Strategies.Domain.Models;
+using Strategies.Service.DataManager;
 using Strategies.Service.Interfaces;
 
 namespace Strategies.Api.Controllers
@@ -125,6 +128,7 @@ namespace Strategies.Api.Controllers
             return StatusCode(statusCode, value);
         }
 
+
         [HttpPost]
         public async Task<IActionResult> InsertOrUpdate(StrategyFormDto strategyFormDto)
         {
@@ -135,12 +139,12 @@ namespace Strategies.Api.Controllers
                 List<CustomerDto> customers = strategyFormDto.Customers;
                 List<CustomerContactDetailDto> customerContactDetailDtos = strategyFormDto.CustomerContactDetails;
                 List<EmploymentDetailDto> employmentDetailDtos = strategyFormDto.EmploymentDetails;
-                StrategyFormDto test = strategyFormDto;
-                test.Customers = strategyFormDto.Customers.Where(x => x.IsPartner == false).ToList();
-                test.CustomerContactDetails = strategyFormDto.CustomerContactDetails.Where(x => x.IsPartner == false).ToList();
-                test.EmploymentDetails = strategyFormDto.EmploymentDetails.Where(x => x.IsPartner == false).ToList();
+                StrategyFormDto objStrategyFormDto = strategyFormDto;
+                objStrategyFormDto.Customers = strategyFormDto.Customers.Where(x => x.IsPartner == false).ToList();
+                objStrategyFormDto.CustomerContactDetails = strategyFormDto.CustomerContactDetails.Where(x => x.IsPartner == false).ToList();
+                objStrategyFormDto.EmploymentDetails = strategyFormDto.EmploymentDetails.Where(x => x.IsPartner == false).ToList();
                 _unitOfWork.BeginTransaction();
-                var result = _mapper.Map<StrategyForm>(test);
+                var result = _mapper.Map<StrategyForm>(objStrategyFormDto);
                 await _unitOfWork.StrategyFormService.InsertOrUpdate(result);
                 await _unitOfWork.CompleteAsync();
                 foreach (var partner in customers.Where(x => x.IsPartner == true))
@@ -180,6 +184,27 @@ namespace Strategies.Api.Controllers
                 _unitOfWork.CommitTransaction();
                 value = new { Formid = result.FormId, Message = "Success" };
                 statusCode = StatusCodes.Status200OK;
+            }
+            catch (Exception ex)
+            {
+                statusCode = StatusCodes.Status500InternalServerError;
+                value = new { Formid = "", Message = ex.Message };
+                _unitOfWork.RollBack();
+            }
+
+            return StatusCode(statusCode, value);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> GenerateStrategy(int formId)
+        {
+            var statusCode = StatusCodes.Status200OK;
+            object? value = null;
+            try
+            {
+                var res= _unitOfWork.StrategyFormService.GenerateStrategy(formId);
+                return null;
             }
             catch (Exception ex)
             {

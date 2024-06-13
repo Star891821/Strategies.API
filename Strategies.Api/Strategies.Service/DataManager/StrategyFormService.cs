@@ -1,6 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using iText.Kernel.Pdf;
+using iText.Layout.Element;
+using Microsoft.EntityFrameworkCore;
 using Strategies.Domain.Models;
 using Strategies.Service.Interfaces;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Reflection.Metadata;
+using iText.Layout;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using iText.Layout.Properties;
 
 namespace Strategies.Service.DataManager
 {
@@ -181,44 +189,235 @@ namespace Strategies.Service.DataManager
             var admissionForm = new StrategyForm();
             try
             {
+                IQueryable<StrategyForm> query = dbSet;
                 if (userWise)
                 {
-                    admissionForm = dbSet.Where(x => x.CreatedBy == UserId && x.FormId == id).FirstOrDefault();
+                    query = query.Where(x => x.CreatedBy == UserId && x.FormId == id);
                 }
                 else
                 {
-                    admissionForm = dbSet.Where(x => x.FormId == id).FirstOrDefault();
-                }
-                if (admissionForm != null)
-                {
-                    dbSet.Entry(admissionForm).Collection(adm => adm.Customers).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.CustomerContactDetails).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.CashFlowRequirements).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.PlannedExpenditures).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.ExpectedFutureInflows).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.IncomeDetails).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.ExpenseDetails).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.EmploymentDetails).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.LifeStyleAssetDetails).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.InvestmentAssetDetails).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.LiabilitiesDetails).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.SuperAssetDetails).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.InsuranceDetails).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.DependantsDetails).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.EstatePlannings).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.AssociatedStructures).Load();
-                    dbSet.Entry(admissionForm).Collection(adm => adm.ProfessionalAdvisersDetails).Load();
-                    // dbSet.Entry(admissionForm).Collection(adm => adm.Disasquentionnaires).Load();
+                    query = query.Where(x => x.FormId == id);
                 }
 
+                // Include related entities
+                query = query
+                    .Include(adm => adm.Customers)
+                    .Include(adm => adm.CustomerContactDetails)
+                    .Include(adm => adm.CashFlowRequirements)
+                    .Include(adm => adm.PlannedExpenditures)
+                    .Include(adm => adm.ExpectedFutureInflows)
+                    .Include(adm => adm.IncomeDetails)
+                    .Include(adm => adm.ExpenseDetails)
+                    .Include(adm => adm.EmploymentDetails)
+                    .Include(adm => adm.LifeStyleAssetDetails)
+                    .Include(adm => adm.InvestmentAssetDetails)
+                    .Include(adm => adm.LiabilitiesDetails)
+                    .Include(adm => adm.SuperAssetDetails)
+                    .Include(adm => adm.InsuranceDetails)
+                    .Include(adm => adm.DependantsDetails)
+                    .Include(adm => adm.EstatePlannings)
+                    .Include(adm => adm.AssociatedStructures)
+                    .Include(adm => adm.ProfessionalAdvisersDetails);
+
+                return query.FirstOrDefault();
             }
             catch (Exception ex)
             {
+                // Handle exception appropriately (e.g., log it)
                 throw ex;
             }
-            return admissionForm;
         }
 
-        #endregion
+        public byte[] GenerateStrategy(int formId)
+        {
+            var result = this.getbyID(formId, null);
+            if (result != null)
+            {
+                if (result.Customers != null && result.Customers.Any())
+                {
+                    var dob = result.Customers.First().Dob;
+                    int age = CalculateAge(dob);
+
+                    // 1. Life Insurance Review
+
+                    // Create a new PDF document
+                    string outputFilePath = @"D:\MyProjects\MeritZeal\Code\Strategies.Api\StrategyReview.pdf";
+                    PdfDocument pdfDocument = new PdfDocument(new PdfWriter(outputFilePath));
+                    iText.Layout.Document document = new iText.Layout.Document(pdfDocument);
+                    if (age <= 70)
+                    {
+                        var srlifeinsurance = context.SrLifeInsurances.FirstOrDefault();
+                        GenerateLifeInsuranceReview(result, pdfDocument, document, srlifeinsurance);
+                    }
+
+                    if (age <= 65)
+                    {
+                        var srTpdinsurances = context.SrTpdinsurances.FirstOrDefault();
+                        GenerateTPDInsuranceReview(result, pdfDocument, document, srTpdinsurances);
+                    }
+
+                    // Close the document
+                    document.Close();
+                }
+            }
+            return null;
+        }
+
+        private void GenerateLifeInsuranceReview(StrategyForm result, PdfDocument pdfDocument, iText.Layout.Document document, SrLifeInsurance srLifeInsurance)
+        {       
+            // Add content to the PDF
+            Paragraph header = new Paragraph(srLifeInsurance.StrategyName + " Review")
+                .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
+                .SetFontSize(18);
+
+            Paragraph clientInfo = new Paragraph($"\"{result.Customers.First().FirstName}\"" + " " + srLifeInsurance.LifeInsuranceReview)
+                .SetMarginTop(20);
+
+            Paragraph additionalConditions = new Paragraph("Additional Conditions:")
+                .SetBold()
+                .SetMarginTop(10);
+
+            string[] conditions = srLifeInsurance.AdditionalConditions.Split(new string[] { "\\n" }, StringSplitOptions.RemoveEmptyEntries);
+            List list = new List()
+                .SetMarginTop(10);
+
+            list.SetListSymbol("");
+            list.SetSymbolIndent(0);
+
+            foreach (string condition in conditions)
+            {
+                list.Add(new ListItem(condition.Trim()));
+            }
+
+            Paragraph notes = new Paragraph("NOTES:")
+                .SetBold()
+                .SetMarginTop(10);
+
+            List notesList = new List()
+               .SetMarginTop(10);
+
+            notesList.SetListSymbol("");
+            string[] srnotes = srLifeInsurance.Notes.Split(new string[] { "\\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string note in srnotes)
+            {
+                notesList.Add(new ListItem(note.Trim()));
+            }
+
+            Paragraph references = new Paragraph("References:")
+                .SetBold()
+                .SetMarginTop(10);
+
+            string[] srreferences = srLifeInsurance.SrReferences.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            List referencesList = new List()
+                .SetMarginTop(10);
+
+            //referencesList.SetListSymbol("•");
+            //referencesList.SetSymbolIndent(0);
+
+            foreach (string reference in srreferences)
+            {
+                referencesList.Add(new ListItem(" " + reference.Trim()));
+            }
+
+            // Add all elements to the document
+            document.Add(header);
+            document.Add(clientInfo);
+            document.Add(additionalConditions);
+            document.Add(list);
+            document.Add(notes);
+            document.Add(notesList);
+            document.Add(references);
+            document.Add(referencesList);
+
+        }
+
+        private void GenerateTPDInsuranceReview(StrategyForm result, PdfDocument pdfDocument, iText.Layout.Document document, SrTpdinsurance srTpdinsurance)
+        {
+            // Add content to the PDF
+            Paragraph header = new Paragraph(srTpdinsurance.StrategyName + " Review")
+                .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
+                .SetFontSize(18)
+                .SetMarginTop(40);
+
+            Paragraph clientInfo = new Paragraph($"\"{result.Customers.First().FirstName}\"" + " " + srTpdinsurance.TpdinsuranceReview)
+                .SetMarginTop(20);
+
+            Paragraph additionalConditions = new Paragraph("Additional Conditions:")
+                .SetBold()
+                .SetMarginTop(10);
+
+            string[] conditions = srTpdinsurance.AdditionalConditions.Split(new string[] { "\\n" }, StringSplitOptions.RemoveEmptyEntries);
+            List list = new List()
+                .SetMarginTop(10);
+
+            list.SetListSymbol("");
+            list.SetSymbolIndent(0);
+
+            foreach (string condition in conditions)
+            {
+                list.Add(new ListItem(condition.Trim()));
+            }
+
+            Paragraph notes = new Paragraph("NOTES:")
+                .SetBold()
+                .SetMarginTop(10);
+
+            List notesList = new List()
+               .SetMarginTop(10);
+
+            //notesList.SetListSymbol("•");
+            notesList.SetListSymbol("");
+            string[] srnotes = srTpdinsurance.Notes.Split(new string[] { "\\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string note in srnotes)
+            {
+                notesList.Add(new ListItem(note.Trim()));
+            }
+
+            Paragraph references = new Paragraph("References:")
+                .SetBold()
+                .SetMarginTop(10);
+
+            string[] srreferences = srTpdinsurance.SrReferences.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            List referencesList = new List()
+                .SetMarginTop(10);
+
+            //referencesList.SetListSymbol("•");
+            //referencesList.SetSymbolIndent(0);
+
+            foreach (string reference in srreferences)
+            {
+                referencesList.Add(new ListItem(" " + reference.Trim()));
+            }
+
+            // Add all elements to the document
+            document.Add(header);
+            document.Add(clientInfo);
+            document.Add(additionalConditions);
+            document.Add(list);
+            document.Add(notes);
+            document.Add(notesList);
+            document.Add(references);
+            document.Add(referencesList);
+
+            
+        }
+
+        #endregion        
+
+        public static int CalculateAge(DateTime dob)
+        {
+            DateTime today = DateTime.Today;
+            int age = today.Year - dob.Year;
+
+            // Check if the date has occurred this year
+            if (dob.Date > today.AddYears(-age))
+            {
+                age--;
+            }
+
+            return age;
+        }
     }
 }
