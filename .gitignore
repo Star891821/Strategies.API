@@ -3,3 +3,11 @@
 ################################################################################
 
 /.vs
+/.vs/
+/bin/
+/Strategies.Api/.vs
+/Strategies.Api/.bin
+/Strategies.Api/.obj
+/Strategies.Api/Strategies.Api/.vs
+/Strategies.Api/Strategies.Api/bin/
+/Strategies.Api/Strategies.Api/obj/
