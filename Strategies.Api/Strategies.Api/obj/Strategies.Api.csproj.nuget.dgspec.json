@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api\\Strategies.Api.csproj": {}
+    "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api\\Strategies.Api.csproj": {}
   },
   "projects": {
-    "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj": {
+    "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj",
+        "projectUniqueName": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj",
         "projectName": "Strategies.Api.Models",
-        "projectPath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj",
+        "projectPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj",
         "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-        "outputPath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api.Models\\obj\\",
+        "outputPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -55,18 +55,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api\\Strategies.Api.csproj": {
+    "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api\\Strategies.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api\\Strategies.Api.csproj",
+        "projectUniqueName": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api\\Strategies.Api.csproj",
         "projectName": "Strategies.Api",
-        "projectPath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api\\Strategies.Api.csproj",
+        "projectPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api\\Strategies.Api.csproj",
         "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-        "outputPath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api\\obj\\",
+        "outputPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -83,14 +83,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj": {
-                "projectPath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj"
+              "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj": {
+                "projectPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj"
               },
-              "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj": {
-                "projectPath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj"
+              "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj": {
+                "projectPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj"
               },
-              "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Service\\Strategies.Service.csproj": {
-                "projectPath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Service\\Strategies.Service.csproj"
+              "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Service\\Strategies.Service.csproj": {
+                "projectPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Service\\Strategies.Service.csproj"
               }
             }
           }
@@ -154,6 +154,14 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "itext7": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            },
+            "itext7.bouncy-castle-adapter": {
+              "target": "Package",
+              "version": "[8.0.4, )"
             }
           },
           "imports": [
@@ -175,18 +183,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj": {
+    "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj",
+        "projectUniqueName": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj",
         "projectName": "Strategies.Domain",
-        "projectPath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj",
+        "projectPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj",
         "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-        "outputPath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Domain\\obj\\",
+        "outputPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -219,6 +227,12 @@
               "target": "Package",
               "version": "[7.0.10, )"
             },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[7.0.10, )"
@@ -240,18 +254,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Service\\Strategies.Service.csproj": {
+    "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Service\\Strategies.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Service\\Strategies.Service.csproj",
+        "projectUniqueName": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Service\\Strategies.Service.csproj",
         "projectName": "Strategies.Service",
-        "projectPath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Service\\Strategies.Service.csproj",
+        "projectPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Service\\Strategies.Service.csproj",
         "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-        "outputPath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Service\\obj\\",
+        "outputPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -268,8 +282,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj": {
-                "projectPath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj"
+              "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj": {
+                "projectPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj"
+              },
+              "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj": {
+                "projectPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj"
               }
             }
           }
@@ -283,6 +300,24 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "itext7": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -299,7 +334,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

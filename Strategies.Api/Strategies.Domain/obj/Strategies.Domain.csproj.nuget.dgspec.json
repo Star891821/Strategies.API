@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj": {}
+    "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj": {}
   },
   "projects": {
-    "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj": {
+    "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj",
+        "projectUniqueName": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj",
         "projectName": "Strategies.Domain",
-        "projectPath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj",
+        "projectPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Domain\\Strategies.Domain.csproj",
         "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-        "outputPath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Domain\\obj\\",
+        "outputPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -44,6 +44,12 @@
               "target": "Package",
               "version": "[7.0.10, )"
             },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[7.0.10, )"
@@ -65,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

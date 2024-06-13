@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\MyProjects\MeritZeal\Deployment\Strategies.Api</_PublishTargetUrl>
+    <History>True|2024-06-02T12:35:46.2923688Z;True|2024-06-02T16:01:46.9378510+05:30;True|2024-05-19T22:28:56.9578699+05:30;True|2024-05-19T22:20:59.2932963+05:30;True|2024-05-19T21:08:18.0526854+05:30;True|2024-05-19T21:07:51.3373107+05:30;True|2024-05-19T20:55:03.8629125+05:30;False|2024-05-19T20:54:52.2972737+05:30;True|2024-05-19T20:45:31.4838260+05:30;True|2024-05-16T23:03:20.9610749+05:30;False|2024-05-16T22:58:12.5376237+05:30;True|2024-05-15T23:59:43.0340460+05:30;True|2024-02-27T09:17:59.2048878+05:30;True|2024-02-26T14:00:53.0157295+05:30;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

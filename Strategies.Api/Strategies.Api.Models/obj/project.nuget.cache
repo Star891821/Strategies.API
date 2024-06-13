@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eLpzipMhHvqx7lqOpXIOioR+04TrF5CsDvidiKFZjoBWAugMLYTS2z915RWHAZLPDGuha1VgnDeXEhk7jocvNQ==",
+  "dgSpecHash": "ZKPf5fTvf9FUFKF4m8tBFlKoKfoEUlAI378Psa+7FA3h+GtTjFC/i6DlznzvHocJ5F1SQs7Mi5NdZ5mxRraswA==",
   "success": true,
-  "projectFilePath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj",
+  "projectFilePath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

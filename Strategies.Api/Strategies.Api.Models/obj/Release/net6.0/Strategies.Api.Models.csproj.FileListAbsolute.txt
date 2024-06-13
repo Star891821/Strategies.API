@@ -1,0 +1,15 @@
+D:\MyProjects\MeritZeal\Code\Strategies.Api\Strategies.Api\Strategies.Api.Models\bin\Release\net6.0\Strategies.Api.Models.exe
+D:\MyProjects\MeritZeal\Code\Strategies.Api\Strategies.Api\Strategies.Api.Models\bin\Release\net6.0\Strategies.Api.Models.deps.json
+D:\MyProjects\MeritZeal\Code\Strategies.Api\Strategies.Api\Strategies.Api.Models\bin\Release\net6.0\Strategies.Api.Models.runtimeconfig.json
+D:\MyProjects\MeritZeal\Code\Strategies.Api\Strategies.Api\Strategies.Api.Models\bin\Release\net6.0\Strategies.Api.Models.dll
+D:\MyProjects\MeritZeal\Code\Strategies.Api\Strategies.Api\Strategies.Api.Models\bin\Release\net6.0\Strategies.Api.Models.pdb
+D:\MyProjects\MeritZeal\Code\Strategies.Api\Strategies.Api\Strategies.Api.Models\obj\Release\net6.0\Strategies.Api.Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\MyProjects\MeritZeal\Code\Strategies.Api\Strategies.Api\Strategies.Api.Models\obj\Release\net6.0\Strategies.Api.Models.AssemblyInfoInputs.cache
+D:\MyProjects\MeritZeal\Code\Strategies.Api\Strategies.Api\Strategies.Api.Models\obj\Release\net6.0\Strategies.Api.Models.AssemblyInfo.cs
+D:\MyProjects\MeritZeal\Code\Strategies.Api\Strategies.Api\Strategies.Api.Models\obj\Release\net6.0\Strategies.Api.Models.csproj.CoreCompileInputs.cache
+D:\MyProjects\MeritZeal\Code\Strategies.Api\Strategies.Api\Strategies.Api.Models\obj\Release\net6.0\Strategies.Api.Models.dll
+D:\MyProjects\MeritZeal\Code\Strategies.Api\Strategies.Api\Strategies.Api.Models\obj\Release\net6.0\refint\Strategies.Api.Models.dll
+D:\MyProjects\MeritZeal\Code\Strategies.Api\Strategies.Api\Strategies.Api.Models\obj\Release\net6.0\Strategies.Api.Models.pdb
+D:\MyProjects\MeritZeal\Code\Strategies.Api\Strategies.Api\Strategies.Api.Models\obj\Release\net6.0\Strategies.Api.Models.genruntimeconfig.cache
+D:\MyProjects\MeritZeal\Code\Strategies.Api\Strategies.Api\Strategies.Api.Models\obj\Release\net6.0\ref\Strategies.Api.Models.dll
+D:\MyProjects\MeritZeal\Code\Strategies.Api\Strategies.Api\Strategies.Api.Models\obj\Release\net6.0\Strategies.Api.Models.sourcelink.json

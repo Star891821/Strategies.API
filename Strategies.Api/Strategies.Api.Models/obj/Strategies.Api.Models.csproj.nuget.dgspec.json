@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj": {}
+    "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj": {}
   },
   "projects": {
-    "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj": {
+    "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj",
+        "projectUniqueName": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj",
         "projectName": "Strategies.Api.Models",
-        "projectPath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj",
+        "projectPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api.Models\\Strategies.Api.Models.csproj",
         "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-        "outputPath": "D:\\MyProjects\\MeritZeal\\Strategies.Api\\Strategies.Api.Models\\obj\\",
+        "outputPath": "D:\\MyProjects\\MeritZeal\\Code\\Strategies.Api\\Strategies.Api\\Strategies.Api.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -55,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
